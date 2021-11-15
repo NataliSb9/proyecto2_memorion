@@ -24,7 +24,7 @@ async function getRandomCharacter() {
     //( no se por que pero sin promesa el terminal se queda pilladisimo)
     let RandomCharacter = new Promise(function (resolve) {
         for (let i = 0; i < 8; i++) {
-            nRand = Math.floor(Math.random() * (20 - 1)) + 1;
+            nRand = Math.floor(Math.random() * (21 - 1)) + 1;
             Url.push(`https://rickandmortyapi.com/api/character/${nRand}`)
             Id.push(nRand);
         }
@@ -41,11 +41,22 @@ async function getRandomCharacter() {
             }
             j++
         }
+        let m = 0;
+        while (m < 8) {
+            for (let h = 0; h < 8; h++) {
+                if (Url[m] == Url[h] && m != h) {
+                    nRand = Math.floor(Math.random() * (20 - 1)) + 1;
+                    Url[m] = `https://rickandmortyapi.com/api/character/${nRand}`;
+                    Id[m] = nRand;
+                }
+            }
+            m++
+        }
         resolve("exito");
     })
 
     // llamamos a dicha promesa:
-    RandomCharacter.then(() => console.log(Url), console.log(Id))
+    RandomCharacter.then(() => console.log(Id))
 
 
     //Inicializo un array que va a contener a las 8 cartas principales, uno con las fotos de estas y otro con los nombres :
@@ -58,9 +69,7 @@ async function getRandomCharacter() {
         await fetch(Url[i])
             .then(response => response.json())
             .then(function (data) {
-                console.log(data.image)
                 Pic = data.image;
-                console.log(Pic)
                 Nam = (data.name);
             })
         FotoCards.push(Pic)
