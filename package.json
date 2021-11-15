@@ -1,0 +1,18 @@
+{
+  "name": "intalent-juego",
+  "version": "1.0.0",
+  "description": "Juego para InTalent",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage",
+    "scss": "node-sass --watch ./styles/scss/ --output ./styles/css/"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.3.1",
+    "node-sass": "^6.0.1"
+  }
+}
