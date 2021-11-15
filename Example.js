@@ -76,8 +76,10 @@ async function getRandomCharacter() {
         NameCards.push(Nam)
         ArrCards.push(new carta(Id[i], FotoCards[i], NameCards[i]))
     }
-    console.log(ArrCards, FotoCards, NameCards)
-
+    
+    let ArrCards_Clone=ArrCards;
+    ArrCards=ArrCards.concat(ArrCards_Clone);
+    console.log(ArrCards)
 }
 
 window.onload = getRandomCharacter()
