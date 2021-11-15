@@ -80,32 +80,64 @@ async function getrandomCharacter() {
 
     let arrCards_Clone = arrCards;
     arrCards = arrCards.concat(arrCards_Clone);
-    console.log(arrCards)
     return arrCards;
 }
 
 
 
 
-const urlImg = "https://hipertextual.com/wp-content/uploads/2017/07/rick-morty-.jpg"
-window.onload = crearDisposicionTarjeta()
 
- async function crearDisposicionTarjeta() {
+
+
+
+
+/***LOGICA JUEGO ---> PONERLO EN EL MAIN.JS****/
+
+
+async function shuffleArrayElements(){
+    
+    let arrTarjetas = await getrandomCharacter();
+
+    console.log(arrTarjetas)
+    
+    for (let i = arrTarjetas.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = arrTarjetas[i];
+        arrTarjetas[i] = arrTarjetas[j];
+        arrTarjetas[j] = temp;
+    }
+
+   //let arratOrdenado = arrTarjetas.sort(()=> Math.random() - 0.5);
+    return arrTarjetas;
+}
+
+console.log(shuffleArrayElements())
+
+
+async function crearDisposicionTarjeta() {
 
     //Aqui cogemos los valores del arrCards y los metemos en la variable papichulo para poder usarlas despues
+      console.log(shuffleArrayElements())  
+      let arrayPersonajes = await shuffleArrayElements();
 
-      let papichulo = await getrandomCharacter();
+      /// Puedes seguir con tus cosas:
+    for (let i = 0; i <= arrayPersonajes.length; i++) {
 
-      /// Puedes eguir con tus cosas:
-    for (let i = 0; i <= 15; i++) {
         let card = document.createElement("div");
         card.id = `card${i}`
         card.innerHTML =
             `<div class="card" style="width: 15rem; height:16rem;">
-            <img class="card-img-top border" src="${urlImg}" alt="Card image cap">
-        </div>`
+                <div class="card_image">
+                    <img style="width: 15rem; height:16rem; class="" src="${arrayPersonajes[i].foto}" alt="card">
+                </div>
+            </div>`
 
-        document.getElementById("tablero").appendChild(card)
+        document.getElementById("tablero").appendChild(card) 
     }
-    console.log(papichulo)
 }
+
+function obtenerPersonajes(){
+
+}
+
+window.onload = crearDisposicionTarjeta()
