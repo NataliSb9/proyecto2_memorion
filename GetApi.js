@@ -38,6 +38,7 @@ async function getrandomCharacter() {
                     Url[j] = `https://rickandmortyapi.com/api/character/${nRand}`;
                     Id[j] = nRand;
                 }
+
             }
             j++
         }
@@ -76,6 +77,7 @@ async function getrandomCharacter() {
         fotoCards.push(Pic)
         nameCards.push(Nam)
         arrCards.push(new Carta(Id[i], fotoCards[i], nameCards[i]))
+        console.log(arrCards)
     }
 
     let arrCards_Clone = arrCards;
@@ -90,54 +92,40 @@ async function getrandomCharacter() {
 
 
 
-
 /***LOGICA JUEGO ---> PONERLO EN EL MAIN.JS****/
+async function shuffleArrayElements() {
 
-
-async function shuffleArrayElements(){
-    
     let arrTarjetas = await getrandomCharacter();
 
     console.log(arrTarjetas)
-    
-    for (let i = arrTarjetas.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let temp = arrTarjetas[i];
-        arrTarjetas[i] = arrTarjetas[j];
-        arrTarjetas[j] = temp;
-    }
 
-   //let arratOrdenado = arrTarjetas.sort(()=> Math.random() - 0.5);
-    return arrTarjetas;
+    let randomizado = arrTarjetas
+        .map(a => [Math.random(), a])
+        .sort((a, b) => a[0] - b[0])
+        .map(a => a[1]);
+
+    console.log(randomizado)
+    return randomizado;
 }
 
-console.log(shuffleArrayElements())
-
-
 async function crearDisposicionTarjeta() {
-
-    //Aqui cogemos los valores del arrCards y los metemos en la variable papichulo para poder usarlas despues
       console.log(shuffleArrayElements())  
       let arrayPersonajes = await shuffleArrayElements();
 
       /// Puedes seguir con tus cosas:
-    for (let i = 0; i <= arrayPersonajes.length; i++) {
-
+    for (let i = 0; i < arrayPersonajes.length; i++) {
+        let foto = arrayPersonajes[i].foto;
         let card = document.createElement("div");
         card.id = `card${i}`
         card.innerHTML =
             `<div class="card" style="width: 15rem; height:16rem;">
                 <div class="card_image">
-                    <img style="width: 15rem; height:16rem; class="" src="${arrayPersonajes[i].foto}" alt="card">
+                    <img style="width: 15rem; height:16rem; class="" src="${foto}" alt="card">
                 </div>
             </div>`
 
         document.getElementById("tablero").appendChild(card) 
     }
-}
-
-function obtenerPersonajes(){
-
 }
 
 window.onload = crearDisposicionTarjeta()
