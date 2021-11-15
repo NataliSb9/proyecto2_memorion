@@ -1,5 +1,5 @@
-// creo la clase carta para asignar atributos a cada una de las cartas que vamos a mostrar:
-class carta {
+// creo la clase Carta para asignar atributos a cada una de las Cartas que vamos a mostrar:
+class Carta {
     constructor(id, foto, nombre) {
         this.id = id;
         this.foto = foto;
@@ -10,8 +10,8 @@ class carta {
 
 
 
-//funcion con la que vamos a obtener los Url para el fetch api y los id de cada carta de manera aleatoria:
-async function getRandomCharacter() {
+//funcion con la que vamos a obtener los Url para el fetch api y los id de cada Carta de manera aleatoria:
+async function getrandomCharacter() {
 
 
     // Inicializamos las variables que vamos a usar:
@@ -22,7 +22,7 @@ async function getRandomCharacter() {
 
     // Creamos una promesa para poder asignar a cada uno de los 8 elementos de los arrays una Url y una id de forma que no se repitan
     //( no se por que pero sin promesa el terminal se queda pilladisimo)
-    let RandomCharacter = new Promise(function (resolve) {
+    let randomCharacter = new Promise(function (resolve,reject) {
         for (let i = 0; i < 8; i++) {
             nRand = Math.floor(Math.random() * (21 - 1)) + 1;
             Url.push(`https://rickandmortyapi.com/api/character/${nRand}`)
@@ -53,16 +53,17 @@ async function getRandomCharacter() {
             m++
         }
         resolve("exito");
+        reject("failure");
     })
 
     // llamamos a dicha promesa:
-    RandomCharacter.then(() => console.log(Id))
+    randomCharacter.then(() => console.log(Id))
 
 
-    //Inicializo un array que va a contener a las 8 cartas principales, uno con las fotos de estas y otro con los nombres :
-    let ArrCards = [];
-    let FotoCards = [];
-    let NameCards = [];
+    //Inicializo un array que va a contener a las 8 Cartas principales, uno con las fotos de estas y otro con los nombres :
+    let arrCards = [];
+    let fotoCards = [];
+    let nameCards = [];
     let Pic;
     let Nam;
     for (let i = 0; i < 8; i++) {
@@ -72,38 +73,39 @@ async function getRandomCharacter() {
                 Pic = data.image;
                 Nam = (data.name);
             })
-        FotoCards.push(Pic)
-        NameCards.push(Nam)
-        ArrCards.push(new carta(Id[i], FotoCards[i], NameCards[i]))
+        fotoCards.push(Pic)
+        nameCards.push(Nam)
+        arrCards.push(new Carta(Id[i], fotoCards[i], nameCards[i]))
     }
-    
-    let ArrCards_Clone=ArrCards;
-    ArrCards=ArrCards.concat(ArrCards_Clone);
-    console.log(ArrCards)
+
+    let arrCards_Clone = arrCards;
+    arrCards = arrCards.concat(arrCards_Clone);
+    console.log(arrCards)
+    return arrCards;
 }
 
-window.onload = getRandomCharacter()
 
 
 
+const urlImg = "https://hipertextual.com/wp-content/uploads/2017/07/rick-morty-.jpg"
+window.onload = crearDisposicionTarjeta()
 
-function GetCards() {
-    getRandomCharacter()
+ async function crearDisposicionTarjeta() {
+
+    //Aqui cogemos los valores del arrCards y los metemos en la variable papichulo para poder usarlas despues
+
+      let papichulo = await getrandomCharacter();
+
+      /// Puedes eguir con tus cosas:
+    for (let i = 0; i <= 15; i++) {
+        let card = document.createElement("div");
+        card.id = `card${i}`
+        card.innerHTML =
+            `<div class="card" style="width: 15rem; height:16rem;">
+            <img class="card-img-top border" src="${urlImg}" alt="Card image cap">
+        </div>`
+
+        document.getElementById("tablero").appendChild(card)
+    }
+    console.log(papichulo)
 }
-document.querySelector(".submit").addEventListener("click", GetCards)
-
-
-
-
-
-/*
-// Esto es para displayear la imagen en pantalla de las fotos
-let url = "https://rickandmortyapi.com/api/character/13"
-fetch(url)
-    .then(response => response.json())
-    .then(function (data) {
-        console.log(data);
-        document.querySelector("#card").innerHTML = `<img src="${data.image}" />`;
-    })
-
-    */

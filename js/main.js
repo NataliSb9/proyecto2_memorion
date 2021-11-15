@@ -1,5 +1,8 @@
-const urlImg = "https://hipertextual.com/wp-content/uploads/2017/07/rick-morty-.jpg"
+//import Arrcards from '../GetApi';
+//import carta from '../GetApi';
 
+const urlImg = "https://hipertextual.com/wp-content/uploads/2017/07/rick-morty-.jpg"
+console.log(Arrcards)
 window.onload = crearDisposicionTarjeta()
 
 function crearDisposicionTarjeta(){
