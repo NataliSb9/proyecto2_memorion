@@ -1,0 +1,24 @@
+article{
+    width: 100rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+section {
+    display: grid;
+    grid-template-columns: 18rem 18rem 18rem 18rem;
+}
+
+
+.card{
+    border-radius: 25rem;
+    margin-top: 2rem;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
