@@ -92,8 +92,7 @@ async function getrandomCharacter() {
 async function crearDisposicionTarjeta() {}
 
 
-
-        /***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE EST'E VINCULADO AL MAIN.JS****/
+/***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE EST'E VINCULADO AL MAIN.JS****/
 
 async function shuffleArrayElements() {
 
@@ -109,18 +108,22 @@ async function shuffleArrayElements() {
     return randomizado;
 }
 
-let arrayIdFotos = [];
-let arrayFotosMatcheadas = [];
-let arrayId = []
+
+
 
 async function crearDisposicionTarjeta() {
-
-    let arrayPersonajes = await shuffleArrayElements();
+    let arrayIdFotos = [];
+    let arrayFotosMatcheadas = [];
     
+    let arrayPersonajes = await shuffleArrayElements();
+    console.log(arrayPersonajes)
+    let arrayId = []
     /// Puedes seguir con tus cosas:
     for (let i = 0; i < arrayPersonajes.length; i++) {
+       
+        arrayId.push(arrayPersonajes[i].id)
         let foto = arrayPersonajes[i].foto;
-        console.log(foto)
+        
         let idFoto = arrayPersonajes[i].id
         arrayId.push(idFoto)
         let card = document.createElement("div");
@@ -131,34 +134,22 @@ async function crearDisposicionTarjeta() {
         let imgPersonajes = document.createElement('img')
         imgPersonajes.classList.add("img-fluid")
         imgPersonajes.setAttribute('src', foto)
-        imgPersonajes.id = `img${i}`;
+        imgPersonajes.setAttribute("data-idFoto", idFoto)
+        imgPersonajes.id = `img${i}`;     
         let idImgPersonaje = imgPersonajes.id
         
-
-        let papichulo = arrayPersonajes;
+        //let papichulo = arrayPersonajes;
 
         document.getElementById("tablero").appendChild(card)
         card.appendChild(imgPersonajes)
         document.getElementById(idImgPersonaje)
-
-        /// Puedes eguir con tus cosas:
-        // for (let i = 0; i <= 15; i++) {
-        //     let card = document.createElement("div");
-        //     card.id = `card${i}`
-        //     card.innerHTML =
-        //         `<div class="card" style="width: 15rem; height:16rem;">
-        //         <button><img class="card-img-top border" Id=img${id}  src="${urlImg}" alt="Card image cap"></button>
-        //         </div>`
-
-           
-            //document.getElementById(idImgPersonaje).addEventListener('click' , almacenarIDcarta)
-        
-
+        document.getElementById(idImgPersonaje).addEventListener('click' , almacenarIDcarta)
 
         // pendiente incluir la funcion que da la vuelta, para crear el evento.
         /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
-
     }
+
+    console.log(arrayPersonajes)
 
     function cambiarFotoInicio() {
        
@@ -166,25 +157,85 @@ async function crearDisposicionTarjeta() {
             let picture = document.getElementById(`img${j}`);
             picture.src = "./styles/scss/Assets/Seeds.png";
         }
-
     }
     cambiarFotoInicio()
 
+    async function cambiarfotoall() {
+
+        for (let j = 0; j < 16; j++) {
+            let picture = document.getElementById(`img${j}`);
+            picture.src = arrayPersonajes[j].foto;
+        }
+        
+        console.log(arrayPersonajes)
+    }
+    document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
+
+   
+    function almacenarIDcarta() {
+        let id = this.getAttribute('data-idFoto')
+        arrayIdFotos.push(id)
+    
+        if (arrayIdFotos.length === 2) {
+            matchCard()
+            arrayIdFotos = []
+        } else if (arrayIdFotos.length > 2){
+            arrayIdFotos = []
+        }
+    
+    }
+    
+    function matchCard(){
+      
+        let atributoIdImg =[]
+        
+        if(arrayFotosMatcheadas.includes(arrayIdFotos[0])){
+            for(let i =0; i< arrayPersonajes.length; i++ ){
+
+                if(arrayPersonajes[i].idFoto === arrayIdFotos[i]){
+                    atributoIdImg.push(i)
+                }
+            }
+         
+            let fotoSelect1 = document.getElementById(`img${atributoIdImg[0]}`)
+            let fotoSelect2 = document.getElementById(`img${atributoIdImg[1]}`)
+    
+            fotoSelect1.removeEventListener("click", almacenarIDcarta);
+            fotoSelect2.removeEventListener("click", almacenarIDcarta);
+
+            
+        }else if(arrayIdFotos[0] === arrayIdFotos[1]){
+            console.log(`Match!`)
+            arrayFotosMatcheadas.push(arrayIdFotos[0])
+    
+        } else if(arrayFotosMatcheadas.length === 7){
+            console.log(`Has superado el juego`)
+        
+        }
+        else {
+            console.log(`no match`)
+        }     
+
+        
+    }
 }
+
+
+
 
 
 // funcion que hace que al hacer click en comenzar se muestren las imagenes que vamos a tener que identificar
-async function cambiarfotoall() {
-    let papichulo = await shuffleArrayElements()
+/* async function cambiarfotoall() {
+    let arrayPersonaje = await shuffleArrayElements()
 
     for (let j = 0; j < 16; j++) {
         let picture = document.getElementById(`img${j}`);
-
-        console.log(papichulo[j].foto)
-        picture.src = papichulo[j].foto;
+        console.log(arrayPersonaje[j].foto)
+        picture.src = arrayPersonaje[j].foto;
     }
 
-}
+    console.log(arrayPersonaje)
+} */
 
 
 // Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
@@ -200,7 +251,6 @@ function timerCambiarAll() {
 
 
 
-document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
 document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
 
 window.onload = crearDisposicionTarjeta()
