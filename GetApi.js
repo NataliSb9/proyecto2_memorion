@@ -116,7 +116,8 @@ async function crearDisposicionTarjeta() {
     let arrayFotosMatcheadas = [];
     let fotosClicadas = []
     let link = [];
-    let idLinks = []
+    let idLinks = [];
+    let cartasNoSeleccionadas = [];
 
     let arrayPersonajes = await shuffleArrayElements();
     console.log(arrayPersonajes)
@@ -159,7 +160,6 @@ async function crearDisposicionTarjeta() {
     console.log(idLinks)
 
     function cambiarFotoInicio() {
-
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
             picture.src = "./styles/scss/Assets/Seeds.png";
@@ -189,13 +189,24 @@ async function crearDisposicionTarjeta() {
         
         if (fotosClicadas.length === 2 && fotosClicadas[0] !== fotosClicadas[1]) {
             matchCard()
-            arrayIdFotos = []
-            fotosClicadas = []
+           
+            
+
+            console.log(fotosClicadas)
             //------------------------Voltear tras seleccionar 2:--------------------------------
             for (let i = 0; i < idLinks.length; i++) {
-                document.getElementById(idLinks[i]).removeEventListener("click", voltear);
+                console.log(fotosClicadas[0])
+                if(idLinks[i] !== fotosClicadas[0] && idLinks[i] !== fotosClicadas[1] )
+                cartasNoSeleccionadas.push(idLinks[i])
+                
             }
-            //---------------------------------------------------------------------------------
+
+            for(let i= 0; i< cartasNoSeleccionadas.length; i++){
+                document.getElementById(cartasNoSeleccionadas[i]).removeEventListener("click", voltear);
+            }
+         
+            arrayIdFotos = [];
+            fotosClicadas = [];
 
         } else if (arrayIdFotos.length > 3) {
             arrayIdFotos = []
@@ -250,13 +261,16 @@ async function crearDisposicionTarjeta() {
         
         } else {
             console.log(`no match`)
+          
             for(let i =0; i< arrayPersonajes.length; i++ ){
 
                 if(arrayPersonajes[i].idFoto === arrayIdFotos[i]){
                     atributoIdImg.push(i)
                 }
             }
-         
+            
+            //cartasNoSeleccionadas.push(img1)
+            //cartasNoSeleccionadas.push(img2)
             let fotoSelect1 = document.getElementById(`img${atributoIdImg[0]}`)
     
             fotoSelect1.addEventListener("click", almacenarIDcarta);
