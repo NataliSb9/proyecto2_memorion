@@ -77,7 +77,7 @@ async function getrandomCharacter() {
         fotoCards.push(Pic)
         nameCards.push(Nam)
         arrCards.push(new Carta(Id[i], fotoCards[i], nameCards[i]))
-        console.log(arrCards)
+
     }
 
     let arrCards_Clone = arrCards;
@@ -92,7 +92,7 @@ async function getrandomCharacter() {
 async function crearDisposicionTarjeta() {}
 
 
-/***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE EST'E VINCULADO AL MAIN.JS****/
+/***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE ESTE VINCULADO AL MAIN.JS****/
 
 async function shuffleArrayElements() {
 
@@ -114,45 +114,51 @@ async function shuffleArrayElements() {
 async function crearDisposicionTarjeta() {
     let arrayIdFotos = [];
     let arrayFotosMatcheadas = [];
-    
+    let link = [];
+    let idLinks = []
+
     let arrayPersonajes = await shuffleArrayElements();
     console.log(arrayPersonajes)
     let arrayId = []
     /// Puedes seguir con tus cosas:
     for (let i = 0; i < arrayPersonajes.length; i++) {
-       
+
         arrayId.push(arrayPersonajes[i].id)
         let foto = arrayPersonajes[i].foto;
-        
+        link.push(foto);
+
         let idFoto = arrayPersonajes[i].id
         arrayId.push(idFoto)
         let card = document.createElement("div");
         card.id = `card${i}`
         card.classList.add("cardCustom");
         card.classList.add("card-image");
-        
+
         let imgPersonajes = document.createElement('img')
         imgPersonajes.classList.add("img-fluid")
         imgPersonajes.setAttribute('src', foto)
         imgPersonajes.setAttribute("data-idFoto", idFoto)
-        imgPersonajes.id = `img${i}`;     
+        imgPersonajes.setAttribute("data-linkFoto", link[i])
+        imgPersonajes.id = `img${i}`;
         let idImgPersonaje = imgPersonajes.id
-        
+        idLinks.push(idImgPersonaje)
+
         //let papichulo = arrayPersonajes;
 
         document.getElementById("tablero").appendChild(card)
         card.appendChild(imgPersonajes)
         document.getElementById(idImgPersonaje)
-        document.getElementById(idImgPersonaje).addEventListener('click' , almacenarIDcarta)
+        document.getElementById(idImgPersonaje).addEventListener('click', almacenarIDcarta)
+        document.getElementById(idImgPersonaje).addEventListener('click', voltear)
 
         // pendiente incluir la funcion que da la vuelta, para crear el evento.
         /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
     }
 
-    console.log(arrayPersonajes)
+    console.log(idLinks)
 
     function cambiarFotoInicio() {
-       
+
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
             picture.src = "./styles/scss/Assets/Seeds.png";
@@ -166,57 +172,77 @@ async function crearDisposicionTarjeta() {
             let picture = document.getElementById(`img${j}`);
             picture.src = arrayPersonajes[j].foto;
         }
-        
+
         console.log(arrayPersonajes)
     }
     document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
 
-   
     function almacenarIDcarta() {
         let id = this.getAttribute('data-idFoto')
         arrayIdFotos.push(id)
-    
+        
         if (arrayIdFotos.length === 2) {
             matchCard()
             arrayIdFotos = []
-        } else if (arrayIdFotos.length > 2){
-            arrayIdFotos = []
-        }
-    
-    }
-    
-    function matchCard(){
-      
-        let atributoIdImg =[]
-        
-        if(arrayFotosMatcheadas.includes(arrayIdFotos[0])){
-            for(let i =0; i< arrayPersonajes.length; i++ ){
+            //------------------------Voltear tras seleccionar 2:--------------------------------
+            for (let i = 0; i < idLinks.length; i++) {
+                document.getElementById(idLinks[i]).removeEventListener("click", voltear);
+            }
+            //---------------------------------------------------------------------------------
 
-                if(arrayPersonajes[i].idFoto === arrayIdFotos[i]){
+        } else if (arrayIdFotos.length > 3) {
+            arrayIdFotos = []
+
+        }
+
+    }
+
+    function voltear() {
+
+        let thisLink = this.getAttribute('data-linkFoto')
+        this.setAttribute('src', thisLink)
+        console.log(thisLink)
+    }
+
+    function tapar() {
+
+        let thisLink = this.getAttribute('data-linkFoto')
+        this.setAttribute('src', "./styles/scss/Assets/Seeds.png")
+        console.log(thisLink)
+    }
+
+    function matchCard() {
+
+        let atributoIdImg = []
+
+        if (arrayFotosMatcheadas.includes(arrayIdFotos[0])) {
+            for (let i = 0; i < arrayPersonajes.length; i++) {
+
+                if (arrayPersonajes[i].idFoto === arrayIdFotos[i]) {
                     atributoIdImg.push(i)
                 }
             }
-         
+
             let fotoSelect1 = document.getElementById(`img${atributoIdImg[0]}`)
             let fotoSelect2 = document.getElementById(`img${atributoIdImg[1]}`)
-    
+
             fotoSelect1.removeEventListener("click", almacenarIDcarta);
             fotoSelect2.removeEventListener("click", almacenarIDcarta);
 
-            
-        }else if(arrayIdFotos[0] === arrayIdFotos[1]){
+
+
+        } else if (arrayIdFotos[0] === arrayIdFotos[1]) {
             console.log(`Match!`)
             arrayFotosMatcheadas.push(arrayIdFotos[0])
-    
-        } else if(arrayFotosMatcheadas.length === 7){
-            console.log(`Has superado el juego`)
-        
-        }
-        else {
-            console.log(`no match`)
-        }     
 
-        
+        } else if (arrayFotosMatcheadas.length === 7) {
+            console.log(`Has superado el juego`)
+
+        } else {
+            console.log(`no match`)
+        }
+
+
     }
 }
 
