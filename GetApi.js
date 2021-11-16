@@ -22,7 +22,7 @@ async function getrandomCharacter() {
 
     // Creamos una promesa para poder asignar a cada uno de los 8 elementos de los arrays una Url y una id de forma que no se repitan
     //( no se por que pero sin promesa el terminal se queda pilladisimo)
-    let randomCharacter = new Promise(function (resolve,reject) {
+    let randomCharacter = new Promise(function (resolve, reject) {
         for (let i = 0; i < 8; i++) {
             nRand = Math.floor(Math.random() * (21 - 1)) + 1;
             Url.push(`https://rickandmortyapi.com/api/character/${nRand}`)
@@ -90,22 +90,62 @@ async function getrandomCharacter() {
 const urlImg = "https://hipertextual.com/wp-content/uploads/2017/07/rick-morty-.jpg"
 window.onload = crearDisposicionTarjeta()
 
- async function crearDisposicionTarjeta() {
+async function crearDisposicionTarjeta() {
 
     //Aqui cogemos los valores del arrCards y los metemos en la variable papichulo para poder usarlas despues
 
-      let papichulo = await getrandomCharacter();
+    let papichulo = await getrandomCharacter();
 
-      /// Puedes eguir con tus cosas:
+
+    /// Puedes eguir con tus cosas:
     for (let i = 0; i <= 15; i++) {
         let card = document.createElement("div");
         card.id = `card${i}`
         card.innerHTML =
             `<div class="card" style="width: 15rem; height:16rem;">
-            <img class="card-img-top border" src="${urlImg}" alt="Card image cap">
+            <button><img class="card-img-top border" Id=img${i}  src="${urlImg}" alt="Card image cap"></button>
         </div>`
 
         document.getElementById("tablero").appendChild(card)
     }
+
+    /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
+    function cambiarFotoInicio() {
+        for (let j = 0; j < 16; j++) {
+            let picture = document.getElementById(`img${j}`);
+            picture.src = "./styles/scss/Assets/Seeds.png";
+        }
+
+    }
+    cambiarFotoInicio()
     console.log(papichulo)
+
 }
+
+
+// funcion que hace que al hacer click en comenzar se muestren las imagenes que vamos a tener que identificar
+async function cambiarfotoall() {
+    let papichulo = await getrandomCharacter();
+    for (let j = 0; j < 16; j++) {
+        let picture = document.getElementById(`img${j}`);
+        picture.src = papichulo[j].foto;
+    }
+
+
+}
+
+
+// Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
+function timerCambiarAll() {
+    setTimeout(function () {
+        for (let j = 0; j < 16; j++) {
+            let picture = document.getElementById(`img${j}`);
+            picture.src = "./styles/scss/Assets/Seeds.png";
+        }
+    }, 2000)
+}
+
+
+
+document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
+document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
