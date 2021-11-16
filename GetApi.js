@@ -113,6 +113,7 @@ async function shuffleArrayElements() {
 
 async function crearDisposicionTarjeta() {
     let arrayIdFotos = [];
+    let arrayLinks = [];
     let arrayFotosMatcheadas = [];
     let link = [];
     let idLinks = []
@@ -149,7 +150,7 @@ async function crearDisposicionTarjeta() {
         card.appendChild(imgPersonajes)
         document.getElementById(idImgPersonaje)
         document.getElementById(idImgPersonaje).addEventListener('click', almacenarIDcarta)
-        document.getElementById(idImgPersonaje).addEventListener('click', voltear)
+        document.getElementById(idImgPersonaje).addEventListener('click', parejas)
 
         // pendiente incluir la funcion que da la vuelta, para crear el evento.
         /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
@@ -180,7 +181,7 @@ async function crearDisposicionTarjeta() {
     function almacenarIDcarta() {
         let id = this.getAttribute('data-idFoto')
         arrayIdFotos.push(id)
-        
+
         if (arrayIdFotos.length === 2) {
             matchCard()
             arrayIdFotos = []
@@ -197,12 +198,29 @@ async function crearDisposicionTarjeta() {
 
     }
 
-    function voltear() {
+    function parejas() {
+        let id = this.getAttribute('data-idFoto')
 
-        let thisLink = this.getAttribute('data-linkFoto')
-        this.setAttribute('src', thisLink)
-        console.log(thisLink)
+        arrayIdFotos.push(id)
+        
+        if (arrayIdFotos.length === 2) {
+            function voltear() {
+                let thisLink = this.getAttribute('data-linkFoto');
+                this.setAttribute('src', thisLink)
+            }
+            arrayIdFotos = []
+            //------------------------Voltear tras seleccionar 2:--------------------------------
+
+            //---------------------------------------------------------------------------------
+
+        } else if (arrayIdFotos.length > 3) {
+            arrayIdFotos = []
+
+        }
     }
+
+
+
 
     function tapar() {
 
