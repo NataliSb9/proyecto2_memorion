@@ -77,7 +77,7 @@ async function getrandomCharacter() {
         fotoCards.push(Pic)
         nameCards.push(Nam)
         arrCards.push(new Carta(Id[i], fotoCards[i], nameCards[i]))
-        console.log(arrCards)
+        
     }
 
     let arrCards_Clone = arrCards;
@@ -98,7 +98,6 @@ async function shuffleArrayElements() {
 
     let arrTarjetas = await getrandomCharacter();
 
-    console.log(arrTarjetas)
 
     let randomizado = arrTarjetas
         .map(a => [Math.random(), a])
@@ -114,13 +113,14 @@ async function shuffleArrayElements() {
 async function crearDisposicionTarjeta() {
     let arrayIdFotos = [];
     let arrayFotosMatcheadas = [];
+    let fotosClicadas = []
     
     let arrayPersonajes = await shuffleArrayElements();
-    console.log(arrayPersonajes)
+   
     let arrayId = []
     /// Puedes seguir con tus cosas:
     for (let i = 0; i < arrayPersonajes.length; i++) {
-       
+        
         arrayId.push(arrayPersonajes[i].id)
         let foto = arrayPersonajes[i].foto;
         
@@ -149,18 +149,18 @@ async function crearDisposicionTarjeta() {
         /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
     }
 
-    console.log(arrayPersonajes)
+    
 
-    function cambiarFotoInicio() {
+   /*  function cambiarFotoInicio() {
        
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
             picture.src = "./styles/scss/Assets/Seeds.png";
         }
     }
-    cambiarFotoInicio()
+    cambiarFotoInicio() */
 
-    async function cambiarfotoall() {
+   /*  async function cambiarfotoall() {
 
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
@@ -169,26 +169,38 @@ async function crearDisposicionTarjeta() {
         
         console.log(arrayPersonajes)
     }
-    document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
+    document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall) */
 
    
     function almacenarIDcarta() {
+        
         let id = this.getAttribute('data-idFoto')
+        let idFotoClicada = this.getAttribute('id')
+
         arrayIdFotos.push(id)
-    
-        if (arrayIdFotos.length === 2) {
+        fotosClicadas.push(idFotoClicada)
+        
+        console.log(fotosClicadas)
+
+        if (fotosClicadas.length === 2 && fotosClicadas[0] !== fotosClicadas[1]) {
             matchCard()
             arrayIdFotos = []
+            fotosClicadas = []
         } else if (arrayIdFotos.length > 2){
             arrayIdFotos = []
+            fotosClicadas = []
         }
-    
+        
     }
     
+
     function matchCard(){
-      
         let atributoIdImg =[]
-        
+        let img1 = document.getElementById(`${fotosClicadas[0]}`)
+        let img2 = document.getElementById(`${fotosClicadas[1]}`)
+        let idCard1 = img1.getAttribute('data-idFoto')
+        let idCard2 = img2.getAttribute('data-idFoto')
+       
         if(arrayFotosMatcheadas.includes(arrayIdFotos[0])){
             for(let i =0; i< arrayPersonajes.length; i++ ){
 
@@ -204,18 +216,31 @@ async function crearDisposicionTarjeta() {
             fotoSelect2.removeEventListener("click", almacenarIDcarta);
 
             
-        }else if(arrayIdFotos[0] === arrayIdFotos[1]){
+        }else if(idCard1=== idCard2 && arrayFotosMatcheadas.length < 8){
             console.log(`Match!`)
-            arrayFotosMatcheadas.push(arrayIdFotos[0])
+            arrayFotosMatcheadas.push(idCard1)
     
-        } else if(arrayFotosMatcheadas.length === 7){
+        } else if(arrayFotosMatcheadas.length === 8){
             console.log(`Has superado el juego`)
         
         }
+
         else {
             console.log(`no match`)
+            for(let i =0; i< arrayPersonajes.length; i++ ){
+
+                if(arrayPersonajes[i].idFoto === arrayIdFotos[i]){
+                    atributoIdImg.push(i)
+                }
+            }
+         
+            let fotoSelect1 = document.getElementById(`img${atributoIdImg[0]}`)
+    
+            fotoSelect1.addEventListener("click", almacenarIDcarta);
+           
         }     
 
+        console.log(arrayFotosMatcheadas)
         
     }
 }
