@@ -114,6 +114,7 @@ async function shuffleArrayElements() {
 async function crearDisposicionTarjeta() {
     let arrayIdFotos = [];
     let arrayFotosMatcheadas = [];
+    let fotosClicadas = []
     let link = [];
     let idLinks = []
 
@@ -179,11 +180,17 @@ async function crearDisposicionTarjeta() {
 
     function almacenarIDcarta() {
         let id = this.getAttribute('data-idFoto')
+        let idFotoClicada = this.getAttribute('id')
+
         arrayIdFotos.push(id)
+        fotosClicadas.push(idFotoClicada)
         
-        if (arrayIdFotos.length === 2) {
+        console.log(fotosClicadas)
+        
+        if (fotosClicadas.length === 2 && fotosClicadas[0] !== fotosClicadas[1]) {
             matchCard()
             arrayIdFotos = []
+            fotosClicadas = []
             //------------------------Voltear tras seleccionar 2:--------------------------------
             for (let i = 0; i < idLinks.length; i++) {
                 document.getElementById(idLinks[i]).removeEventListener("click", voltear);
@@ -192,7 +199,7 @@ async function crearDisposicionTarjeta() {
 
         } else if (arrayIdFotos.length > 3) {
             arrayIdFotos = []
-
+            fotosClicadas = []
         }
 
     }
@@ -213,7 +220,11 @@ async function crearDisposicionTarjeta() {
 
     function matchCard() {
 
-        let atributoIdImg = []
+        let atributoIdImg = [];
+        let img1 = document.getElementById(`${fotosClicadas[0]}`)
+        let img2 = document.getElementById(`${fotosClicadas[1]}`)
+        let idCard1 = img1.getAttribute('data-idFoto')
+        let idCard2 = img2.getAttribute('data-idFoto')
 
         if (arrayFotosMatcheadas.includes(arrayIdFotos[0])) {
             for (let i = 0; i < arrayPersonajes.length; i++) {
@@ -230,20 +241,34 @@ async function crearDisposicionTarjeta() {
             fotoSelect2.removeEventListener("click", almacenarIDcarta);
 
 
-
-        } else if (arrayIdFotos[0] === arrayIdFotos[1]) {
+        } else if (idCard1=== idCard2 && arrayFotosMatcheadas.length < 8) {
             console.log(`Match!`)
-            arrayFotosMatcheadas.push(arrayIdFotos[0])
+            arrayFotosMatcheadas.push(idCard1)
 
-        } else if (arrayFotosMatcheadas.length === 7) {
+        }  else if(arrayFotosMatcheadas.length === 8){
             console.log(`Has superado el juego`)
-
+        
         } else {
             console.log(`no match`)
-        }
+            for(let i =0; i< arrayPersonajes.length; i++ ){
 
+                if(arrayPersonajes[i].idFoto === arrayIdFotos[i]){
+                    atributoIdImg.push(i)
+                }
+            }
+         
+            let fotoSelect1 = document.getElementById(`img${atributoIdImg[0]}`)
+    
+            fotoSelect1.addEventListener("click", almacenarIDcarta);
+           
+        }     
 
+        console.log(arrayFotosMatcheadas)
+        
     }
+
+
+    
 }
 
 
