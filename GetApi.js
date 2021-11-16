@@ -77,7 +77,7 @@ async function getrandomCharacter() {
         fotoCards.push(Pic)
         nameCards.push(Nam)
         arrCards.push(new Carta(Id[i], fotoCards[i], nameCards[i]))
-        console.log(arrCards)
+
     }
 
     let arrCards_Clone = arrCards;
@@ -86,14 +86,7 @@ async function getrandomCharacter() {
 }
 
 
-
-
-
-async function crearDisposicionTarjeta() {}
-
-
-
-        /***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE EST'E VINCULADO AL MAIN.JS****/
+/***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE EST'E VINCULADO AL MAIN.JS****/
 
 async function shuffleArrayElements() {
 
@@ -113,55 +106,42 @@ let arrayIdFotos = [];
 let arrayFotosMatcheadas = [];
 let arrayId = []
 
+function getArrayPersonajes() {}
+
 async function crearDisposicionTarjeta() {
 
     let arrayPersonajes = await shuffleArrayElements();
-    
+    let links = [];
     /// Puedes seguir con tus cosas:
     for (let i = 0; i < arrayPersonajes.length; i++) {
         let foto = arrayPersonajes[i].foto;
-        console.log(foto)
         let idFoto = arrayPersonajes[i].id
+        links.push(foto);
         arrayId.push(idFoto)
         let card = document.createElement("div");
         card.id = `card${i}`
         card.classList.add("cardCustom");
         card.classList.add("card-image");
-        
+
+
         let imgPersonajes = document.createElement('img')
         imgPersonajes.classList.add("img-fluid")
         imgPersonajes.setAttribute('src', foto)
         imgPersonajes.id = `img${i}`;
         let idImgPersonaje = imgPersonajes.id
-        
 
-        let papichulo = arrayPersonajes;
+
 
         document.getElementById("tablero").appendChild(card)
         card.appendChild(imgPersonajes)
         document.getElementById(idImgPersonaje)
 
-        /// Puedes eguir con tus cosas:
-        // for (let i = 0; i <= 15; i++) {
-        //     let card = document.createElement("div");
-        //     card.id = `card${i}`
-        //     card.innerHTML =
-        //         `<div class="card" style="width: 15rem; height:16rem;">
-        //         <button><img class="card-img-top border" Id=img${id}  src="${urlImg}" alt="Card image cap"></button>
-        //         </div>`
-
-           
-            //document.getElementById(idImgPersonaje).addEventListener('click' , almacenarIDcarta)
-        
-
-
-        // pendiente incluir la funcion que da la vuelta, para crear el evento.
-        /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
 
     }
 
+    /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
     function cambiarFotoInicio() {
-       
+
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
             picture.src = "./styles/scss/Assets/Seeds.png";
@@ -169,19 +149,16 @@ async function crearDisposicionTarjeta() {
 
     }
     cambiarFotoInicio()
-
 }
 
 
 // funcion que hace que al hacer click en comenzar se muestren las imagenes que vamos a tener que identificar
 async function cambiarfotoall() {
-    let papichulo = await shuffleArrayElements()
+    let arrayPersonajes = await shuffleArrayElements()
 
     for (let j = 0; j < 16; j++) {
         let picture = document.getElementById(`img${j}`);
-
-        console.log(papichulo[j].foto)
-        picture.src = papichulo[j].foto;
+        picture.src = arrayPersonajes[j].foto;
     }
 
 }
@@ -195,12 +172,30 @@ function timerCambiarAll() {
             picture.src = "./styles/scss/Assets/Seeds.png";
         }
     }, 2000)
+    console.log(arrayId);
 }
 
 
 
 
+
+// Cargar la disposicion al entrar en la pagina:
+window.onload = crearDisposicionTarjeta()
+// ENseñar cartas al hacer click en empezar:
 document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
 document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
 
-window.onload = crearDisposicionTarjeta()
+
+/**for (let i = 0; i < 16; i++) {
+    console.log("bucle dos")
+    if (posiciones[i] == true) {
+        for (let j = 0; j < 16; j++) {
+            let bocaArriba = document.getElementById(`img${j}`);
+            document.getElementById(`card${j}`).removeEventListener("click", function lenvata() {
+                if (bocaArriba.src = "./styles/scss/Assets/Seeds.png") {
+                    bocaArriba.src = li[j];
+                }
+            })
+        }
+    }
+}*/
