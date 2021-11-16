@@ -4,9 +4,9 @@ class Carta {
         this.id = id;
         this.foto = foto;
         this.nombre = nombre;
-        // this.revelada = false;
     }
 }
+
 
 
 
@@ -92,6 +92,44 @@ async function getRandomCharacter() {
 
 /***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE ESTE VINCULADO AL MAIN.JS****/
 
+
+class CartaTablero {
+
+    constructor(parId, foto, nombre, idDom) {
+        this.fotoTapadaSrc = "./styles/scss/Assets/Seeds.png";
+        this.parId = parId;
+        this.foto = foto;
+        this.nombre = nombre;
+        this.idDom = idDom;
+        this.revelada = false;
+    }
+
+    getHtml(){
+        let card = document.createElement("div");
+        card.id = `card${this.idDom}`
+        card.classList.add("cardCustom");
+        card.classList.add("card-image");
+
+        let personajeImgHtml = document.createElement('img')
+        personajeImgHtml.classList.add("img-fluid")
+        if(this.revelada){
+            personajeImgHtml.setAttribute('src', this.foto)
+        }else{
+            personajeImgHtml.setAttribute('src', this.fotoTapadaSrc)
+        }
+        personajeImgHtml.setAttribute("data-idFoto", this.idDom)
+        personajeImgHtml.setAttribute("data-linkFoto", this.foto)
+        personajeImgHtml.id = `img${this.idDom}`;
+        card.appendChild(personajeImgHtml)
+
+        return card;
+    }
+
+    voltear(){
+        this.revelada = !this.revelada
+    }
+}
+
 function shuffle(array){
     return array
         .map(a => [Math.random(), a])
@@ -102,207 +140,65 @@ function shuffle(array){
 class Juego{
     constructor(){
         this.tablero = []
+        this.volteadas = [];
+        this.correctas =[];
     }
 
     comenzar(){
         getRandomCharacter()
         .then(cartas => shuffle(cartas))
-        .then(cartas => this.tablero = cartas)
-        .then(() => crearDisposicionTarjeta(this.tablero))
-    }
-}
-
-
-
-
-function crearDisposicionTarjeta(cartas) {
-    let arrayIdFotos = [];
-    let arrayFotosMatcheadas = [];
-    let fotosClicadas = []
-    let link = [];
-    let idLinks = [];
-    let cartasNoSeleccionadas = [];
-
-    let arrayPersonajes = cartas
-    console.log(arrayPersonajes)
-    let arrayId = []
-    /// Puedes seguir con tus cosas:
-    for (let i = 0; i < arrayPersonajes.length; i++) {
-
-        arrayId.push(arrayPersonajes[i].id)
-        let foto = arrayPersonajes[i].foto;
-        link.push(foto);
-
-        let idFoto = arrayPersonajes[i].id
-        arrayId.push(idFoto)
-        let card = document.createElement("div");
-        card.id = `card${i}`
-        card.classList.add("cardCustom");
-        card.classList.add("card-image");
-
-        let imgPersonajes = document.createElement('img')
-        imgPersonajes.classList.add("img-fluid")
-        imgPersonajes.setAttribute('src', foto)
-        imgPersonajes.setAttribute("data-idFoto", idFoto)
-        imgPersonajes.setAttribute("data-linkFoto", link[i])
-        imgPersonajes.id = `img${i}`;
-        let idImgPersonaje = imgPersonajes.id
-        idLinks.push(idImgPersonaje)
-
-        //let papichulo = arrayPersonajes;
-
-        document.getElementById("tablero").appendChild(card)
-        card.appendChild(imgPersonajes)
-        document.getElementById(idImgPersonaje)
-        document.getElementById(idImgPersonaje).addEventListener('click', almacenarIDcarta)
-        document.getElementById(idImgPersonaje).addEventListener('click', voltear)
-
-        // pendiente incluir la funcion que da la vuelta, para crear el evento.
-        /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
+        .then(cartas => this.tablero = this.getCartasTablero(cartas))
+        .then(() => this.pintar())
     }
 
-    console.log(idLinks)
-
-
-    cambiarFotoInicio()
-
-    function cambiarfotoall() {
-
-        for (let j = 0; j < 16; j++) {
-            let picture = document.getElementById(`img${j}`);
-            picture.src = arrayPersonajes[j].foto;
-        }
-
-        console.log(arrayPersonajes)
-    }
-    document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
-
-    function almacenarIDcarta() {
-        let id = this.getAttribute('data-idFoto')
-        let idFotoClicada = this.getAttribute('id')
-
-        arrayIdFotos.push(id)
-        fotosClicadas.push(idFotoClicada)
-        
-        console.log(fotosClicadas)
-        
-        if (fotosClicadas.length === 2 && fotosClicadas[0] !== fotosClicadas[1]) {
-            matchCard()
-           
-            
-
-            console.log(fotosClicadas)
-            //------------------------Voltear tras seleccionar 2:--------------------------------
-            for (let i = 0; i < idLinks.length; i++) {
-                console.log(fotosClicadas[0])
-                if(idLinks[i] !== fotosClicadas[0] && idLinks[i] !== fotosClicadas[1] )
-                cartasNoSeleccionadas.push(idLinks[i])
-                
-            }
-
-            for(let i= 0; i< cartasNoSeleccionadas.length; i++){
-                document.getElementById(cartasNoSeleccionadas[i]).removeEventListener("click", voltear);
-            }
-         
-            arrayIdFotos = [];
-            fotosClicadas = [];
-
-        } else if (arrayIdFotos.length > 3) {
-            arrayIdFotos = []
-            fotosClicadas = []
-        }
-
-    }
-
-    function voltear() {
-
-        let thisLink = this.getAttribute('data-linkFoto')
-        this.setAttribute('src', thisLink)
-        console.log(thisLink)
-    }
-
-    function tapar() {
-
-        let thisLink = this.getAttribute('data-linkFoto')
-        this.setAttribute('src', "./styles/scss/Assets/Seeds.png")
-        console.log(thisLink)
-    }
-
-    function matchCard() {
-
-        let atributoIdImg = [];
-        let img1 = document.getElementById(`${fotosClicadas[0]}`)
-        let img2 = document.getElementById(`${fotosClicadas[1]}`)
-        let idCard1 = img1.getAttribute('data-idFoto')
-        let idCard2 = img2.getAttribute('data-idFoto')
-
-        if (arrayFotosMatcheadas.includes(arrayIdFotos[0])) {
-            for (let i = 0; i < arrayPersonajes.length; i++) {
-
-                if (arrayPersonajes[i].idFoto === arrayIdFotos[i]) {
-                    atributoIdImg.push(i)
-                }
-            }
-
-            let fotoSelect1 = document.getElementById(`img${atributoIdImg[0]}`)
-            let fotoSelect2 = document.getElementById(`img${atributoIdImg[1]}`)
-
-            fotoSelect1.removeEventListener("click", almacenarIDcarta);
-            fotoSelect2.removeEventListener("click", almacenarIDcarta);
-
-
-        } else if (idCard1=== idCard2 && arrayFotosMatcheadas.length < 8) {
-            console.log(`Match!`)
-            arrayFotosMatcheadas.push(idCard1)
-
-        }  else if(arrayFotosMatcheadas.length === 8){
-            console.log(`Has superado el juego`)
-        
-        } else {
-            console.log(`no match`)
-          
-            for(let i =0; i< arrayPersonajes.length; i++ ){
-
-                if(arrayPersonajes[i].idFoto === arrayIdFotos[i]){
-                    atributoIdImg.push(i)
-                }
-            }
-            
-            //cartasNoSeleccionadas.push(img1)
-            //cartasNoSeleccionadas.push(img2)
-            let fotoSelect1 = document.getElementById(`img${atributoIdImg[0]}`)
+    getCartasTablero(cartas){
+        let result = []
     
-            fotoSelect1.addEventListener("click", almacenarIDcarta);
-           
-        }     
-
-        console.log(arrayFotosMatcheadas)
+        for(let i = 0; i<cartas.length; i++){
+            result.push(new CartaTablero(cartas[i].id, cartas[i].foto, i))
+        }
         
+        return result
+    }    
+
+    pintar(){
+        document.getElementById("tablero").innerHTML = ""
+        for (let i = 0; i < this.tablero.length; i++) {
+            
+            let card = this.tablero[i].getHtml()
+    
+            document.getElementById("tablero").appendChild(card)
+
+            if(!this.correctas.includes(this.tablero[i])){
+                card.addEventListener('click', () => {
+                    if(this.volteadas.length < 2){
+                        this.tablero[i].voltear()
+                        this.volteadas.push(this.tablero[i])
+                        this.pintar()
+                    }
+                })
+            }
+        }
+        this.resolverMatches()
+    }
+
+    resolverMatches(){
+        if(this.volteadas.length > 0){
+            if(this.volteadas[0].parId === this.volteadas[1].parId){
+                console.log(`match!`)
+                this.correctas.push(this.volteadas[0])
+                this.correctas.push(this.volteadas[1])
+                this.volteadas = []
+                this.pintar()
+            }else{
+                this.volteadas[0].voltear()
+                this.volteadas[1].voltear()
+                this.volteadas = []
+            }    
+        }
     }
     
 }
-
-
-function cambiarFotoInicio() {
-    for (let j = 0; j < 16; j++) {
-        let picture = document.getElementById(`img${j}`);
-        picture.src = "./styles/scss/Assets/Seeds.png";
-    }
-}
-
-
-// funcion que hace que al hacer click en comenzar se muestren las imagenes que vamos a tener que identificar
-/* async function cambiarfotoall() {
-    let arrayPersonaje = await shuffleArrayElements()
-
-    for (let j = 0; j < 16; j++) {
-        let picture = document.getElementById(`img${j}`);
-        console.log(arrayPersonaje[j].foto)
-        picture.src = arrayPersonaje[j].foto;
-    }
-
-    console.log(arrayPersonaje)
-} */
 
 
 // Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
@@ -314,8 +210,6 @@ function timerCambiarAll() {
         }
     }, 2000)
 }
-
-
 
 
 document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
