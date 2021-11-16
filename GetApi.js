@@ -4,6 +4,7 @@ class Carta {
         this.id = id;
         this.foto = foto;
         this.nombre = nombre;
+        // this.revelada = false;
     }
 }
 
@@ -11,7 +12,7 @@ class Carta {
 
 
 //funcion con la que vamos a obtener los Url para el fetch api y los id de cada Carta de manera aleatoria:
-async function getrandomCharacter() {
+async function getRandomCharacter() {
 
 
     // Inicializamos las variables que vamos a usar:
@@ -89,29 +90,32 @@ async function getrandomCharacter() {
 
 
 
-async function crearDisposicionTarjeta() {}
-
-
 /***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE ESTE VINCULADO AL MAIN.JS****/
 
-async function shuffleArrayElements() {
-
-    let arrTarjetas = await getrandomCharacter();
-
-    console.log(arrTarjetas)
-
-    let randomizado = arrTarjetas
+function shuffle(array){
+    return array
         .map(a => [Math.random(), a])
         .sort((a, b) => a[0] - b[0])
         .map(a => a[1]);
+}
 
-    return randomizado;
+class Juego{
+    constructor(){
+        this.tablero = []
+    }
+
+    comenzar(){
+        getRandomCharacter()
+        .then(cartas => shuffle(cartas))
+        .then(cartas => this.tablero = cartas)
+        .then(() => crearDisposicionTarjeta(this.tablero))
+    }
 }
 
 
 
 
-async function crearDisposicionTarjeta() {
+function crearDisposicionTarjeta(cartas) {
     let arrayIdFotos = [];
     let arrayFotosMatcheadas = [];
     let fotosClicadas = []
@@ -119,7 +123,7 @@ async function crearDisposicionTarjeta() {
     let idLinks = [];
     let cartasNoSeleccionadas = [];
 
-    let arrayPersonajes = await shuffleArrayElements();
+    let arrayPersonajes = cartas
     console.log(arrayPersonajes)
     let arrayId = []
     /// Puedes seguir con tus cosas:
@@ -159,15 +163,10 @@ async function crearDisposicionTarjeta() {
 
     console.log(idLinks)
 
-    function cambiarFotoInicio() {
-        for (let j = 0; j < 16; j++) {
-            let picture = document.getElementById(`img${j}`);
-            picture.src = "./styles/scss/Assets/Seeds.png";
-        }
-    }
+
     cambiarFotoInicio()
 
-    async function cambiarfotoall() {
+    function cambiarfotoall() {
 
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
@@ -280,13 +279,16 @@ async function crearDisposicionTarjeta() {
         console.log(arrayFotosMatcheadas)
         
     }
-
-
     
 }
 
 
-
+function cambiarFotoInicio() {
+    for (let j = 0; j < 16; j++) {
+        let picture = document.getElementById(`img${j}`);
+        picture.src = "./styles/scss/Assets/Seeds.png";
+    }
+}
 
 
 // funcion que hace que al hacer click en comenzar se muestren las imagenes que vamos a tener que identificar
@@ -318,4 +320,6 @@ function timerCambiarAll() {
 
 document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
 
-window.onload = crearDisposicionTarjeta()
+let juego = new Juego()
+
+window.onload = juego.comenzar()
