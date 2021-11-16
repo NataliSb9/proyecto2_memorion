@@ -92,7 +92,8 @@ async function getrandomCharacter() {
 
 
 
-/***LOGICA JUEGO ---> PONERLO EN EL MAIN.JS****/
+/***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE EST'E VINCULADO AL MAIN.JS****/
+
 async function shuffleArrayElements() {
 
     let arrTarjetas = await getrandomCharacter();
@@ -104,28 +105,44 @@ async function shuffleArrayElements() {
         .sort((a, b) => a[0] - b[0])
         .map(a => a[1]);
 
-    console.log(randomizado)
     return randomizado;
 }
 
+let arrayIdFotos = [];
+let arrayFotosMatcheadas = [];
 async function crearDisposicionTarjeta() {
-      console.log(shuffleArrayElements())  
+    
       let arrayPersonajes = await shuffleArrayElements();
 
       /// Puedes seguir con tus cosas:
     for (let i = 0; i < arrayPersonajes.length; i++) {
         let foto = arrayPersonajes[i].foto;
+
+        console.log(foto)
+        let idFoto = arrayPersonajes[i].id
         let card = document.createElement("div");
         card.id = `card${i}`
-        card.innerHTML =
-            `<div class="card" style="width: 15rem; height:16rem;">
-                <div class="card_image">
-                    <img style="width: 15rem; height:16rem; class="" src="${foto}" alt="card">
-                </div>
-            </div>`
+        let imgPersonajes = document.createElement('img')
+        imgPersonajes.setAttribute('src',foto)
+        imgPersonajes.id = idFoto;
+        let idImgPersonaje = imgPersonajes.id
+        // card.innerHTML =
+        //     `<div class="card" style="width: 15rem; height:16rem;">
+        //         <div class="card_image">
+        //             <img style="width: 15rem; height:16rem; id"${idFoto}" class="cardFoto" src="${foto}" alt="card">
+        //         </div>
+        //     </div>`
 
-        document.getElementById("tablero").appendChild(card) 
+        document.getElementById("tablero").appendChild(card)
+        card.appendChild(imgPersonajes)
+        document.getElementById(idImgPersonaje)
+        //document.getElementById(idImgPersonaje).addEventListener('click' , almacenarIDcarta)
     }
+
+    
+    // pendiente incluir la funcion que da la vuelta, para crear el evento.
 }
+
+
 
 window.onload = crearDisposicionTarjeta()
