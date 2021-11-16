@@ -151,16 +151,16 @@ async function crearDisposicionTarjeta() {
 
     
 
-   /*  function cambiarFotoInicio() {
+   function cambiarFotoInicio() {
        
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
             picture.src = "./styles/scss/Assets/Seeds.png";
         }
     }
-    cambiarFotoInicio() */
+    cambiarFotoInicio()
 
-   /*  async function cambiarfotoall() {
+   async function cambiarfotoall() {
 
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
@@ -169,7 +169,7 @@ async function crearDisposicionTarjeta() {
         
         console.log(arrayPersonajes)
     }
-    document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall) */
+    document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
 
    
     function almacenarIDcarta() {
