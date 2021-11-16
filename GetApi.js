@@ -248,7 +248,7 @@ function timerCambiarAll() {
             picture.src = "./styles/scss/Assets/Seeds.png";
         }
     }, 2000)
-    console.log(arrayId);
+    
 }
 
 
