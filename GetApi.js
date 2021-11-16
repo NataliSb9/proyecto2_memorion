@@ -22,7 +22,7 @@ async function getrandomCharacter() {
 
     // Creamos una promesa para poder asignar a cada uno de los 8 elementos de los arrays una Url y una id de forma que no se repitan
     //( no se por que pero sin promesa el terminal se queda pilladisimo)
-    let randomCharacter = new Promise(function (resolve,reject) {
+    let randomCharacter = new Promise(function (resolve, reject) {
         for (let i = 0; i < 8; i++) {
             nRand = Math.floor(Math.random() * (21 - 1)) + 1;
             Url.push(`https://rickandmortyapi.com/api/character/${nRand}`)
@@ -89,10 +89,11 @@ async function getrandomCharacter() {
 
 
 
+async function crearDisposicionTarjeta() {}
 
 
 
-/***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE EST'E VINCULADO AL MAIN.JS****/
+        /***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE EST'E VINCULADO AL MAIN.JS****/
 
 async function shuffleArrayElements() {
 
@@ -110,39 +111,96 @@ async function shuffleArrayElements() {
 
 let arrayIdFotos = [];
 let arrayFotosMatcheadas = [];
-async function crearDisposicionTarjeta() {
-    
-      let arrayPersonajes = await shuffleArrayElements();
+let arrayId = []
 
-      /// Puedes seguir con tus cosas:
+async function crearDisposicionTarjeta() {
+
+    let arrayPersonajes = await shuffleArrayElements();
+    
+    /// Puedes seguir con tus cosas:
     for (let i = 0; i < arrayPersonajes.length; i++) {
         let foto = arrayPersonajes[i].foto;
-
         console.log(foto)
         let idFoto = arrayPersonajes[i].id
+        arrayId.push(idFoto)
         let card = document.createElement("div");
         card.id = `card${i}`
+        card.classList.add("cardCustom");
+        card.classList.add("card-image");
+        
         let imgPersonajes = document.createElement('img')
-        imgPersonajes.setAttribute('src',foto)
-        imgPersonajes.id = idFoto;
+        imgPersonajes.classList.add("img-fluid")
+        imgPersonajes.setAttribute('src', foto)
+        imgPersonajes.id = `img${i}`;
         let idImgPersonaje = imgPersonajes.id
-        // card.innerHTML =
-        //     `<div class="card" style="width: 15rem; height:16rem;">
-        //         <div class="card_image">
-        //             <img style="width: 15rem; height:16rem; id"${idFoto}" class="cardFoto" src="${foto}" alt="card">
-        //         </div>
-        //     </div>`
+        
+
+        let papichulo = arrayPersonajes;
 
         document.getElementById("tablero").appendChild(card)
         card.appendChild(imgPersonajes)
         document.getElementById(idImgPersonaje)
-        //document.getElementById(idImgPersonaje).addEventListener('click' , almacenarIDcarta)
+
+        /// Puedes eguir con tus cosas:
+        // for (let i = 0; i <= 15; i++) {
+        //     let card = document.createElement("div");
+        //     card.id = `card${i}`
+        //     card.innerHTML =
+        //         `<div class="card" style="width: 15rem; height:16rem;">
+        //         <button><img class="card-img-top border" Id=img${id}  src="${urlImg}" alt="Card image cap"></button>
+        //         </div>`
+
+           
+            //document.getElementById(idImgPersonaje).addEventListener('click' , almacenarIDcarta)
+        
+
+
+        // pendiente incluir la funcion que da la vuelta, para crear el evento.
+        /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
+
     }
 
-    
-    // pendiente incluir la funcion que da la vuelta, para crear el evento.
+    function cambiarFotoInicio() {
+       
+        for (let j = 0; j < 16; j++) {
+            let picture = document.getElementById(`img${j}`);
+            picture.src = "./styles/scss/Assets/Seeds.png";
+        }
+
+    }
+    cambiarFotoInicio()
+
 }
 
 
+// funcion que hace que al hacer click en comenzar se muestren las imagenes que vamos a tener que identificar
+async function cambiarfotoall() {
+    let papichulo = await shuffleArrayElements()
+
+    for (let j = 0; j < 16; j++) {
+        let picture = document.getElementById(`img${j}`);
+
+        console.log(papichulo[j].foto)
+        picture.src = papichulo[j].foto;
+    }
+
+}
+
+
+// Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
+function timerCambiarAll() {
+    setTimeout(function () {
+        for (let j = 0; j < 16; j++) {
+            let picture = document.getElementById(`img${j}`);
+            picture.src = "./styles/scss/Assets/Seeds.png";
+        }
+    }, 2000)
+}
+
+
+
+
+document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
+document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
 
 window.onload = crearDisposicionTarjeta()
