@@ -10,8 +10,9 @@ class Carta {
 
 
 
+
 //funcion con la que vamos a obtener los Url para el fetch api y los id de cada Carta de manera aleatoria:
-async function getrandomCharacter() {
+async function getRandomCharacter() {
 
 
     // Inicializamos las variables que vamos a usar:
@@ -89,201 +90,141 @@ async function getrandomCharacter() {
 
 
 
-async function crearDisposicionTarjeta() {}
-
-
 /***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE ESTE VINCULADO AL MAIN.JS****/
 
-async function shuffleArrayElements() {
 
-    let arrTarjetas = await getrandomCharacter();
+class CartaTablero {
 
-    console.log(arrTarjetas)
+    constructor(parId, foto, nombre, idDom) {
+        this.fotoTapadaSrc = "./styles/scss/Assets/Seeds.png";
+        this.parId = parId;
+        this.foto = foto;
+        this.nombre = nombre;
+        this.idDom = idDom;
+        this.revelada = false;
+    }
 
-    let randomizado = arrTarjetas
-        .map(a => [Math.random(), a])
-        .sort((a, b) => a[0] - b[0])
-        .map(a => a[1]);
-
-    return randomizado;
-}
-
-
-
-
-async function crearDisposicionTarjeta() {
-    let arrayIdFotos = [];
-    let arrayLinks = [];
-    let arrayFotosMatcheadas = [];
-    let link = [];
-    let idLinks = []
-
-    let arrayPersonajes = await shuffleArrayElements();
-    console.log(arrayPersonajes)
-    let arrayId = []
-    /// Puedes seguir con tus cosas:
-    for (let i = 0; i < arrayPersonajes.length; i++) {
-
-        arrayId.push(arrayPersonajes[i].id)
-        let foto = arrayPersonajes[i].foto;
-        link.push(foto);
-
-        let idFoto = arrayPersonajes[i].id
-        arrayId.push(idFoto)
+    getHtml(){
         let card = document.createElement("div");
-        card.id = `card${i}`
+        card.id = `card${this.idDom}`
         card.classList.add("cardCustom");
         card.classList.add("card-image");
 
-        let imgPersonajes = document.createElement('img')
-        imgPersonajes.classList.add("img-fluid")
-        imgPersonajes.setAttribute('src', foto)
-        imgPersonajes.setAttribute("data-idFoto", idFoto)
-        imgPersonajes.setAttribute("data-linkFoto", link[i])
-        imgPersonajes.id = `img${i}`;
-        let idImgPersonaje = imgPersonajes.id
-        idLinks.push(idImgPersonaje)
-
-        //let papichulo = arrayPersonajes;
-
-        document.getElementById("tablero").appendChild(card)
-        card.appendChild(imgPersonajes)
-        document.getElementById(idImgPersonaje)
-        document.getElementById(idImgPersonaje).addEventListener('click', almacenarIDcarta)
-        document.getElementById(idImgPersonaje).addEventListener('click', parejas)
-
-        // pendiente incluir la funcion que da la vuelta, para crear el evento.
-        /// funcion que pone ocultas todas las cartas al entrar en la pagina para que no se vean directamente las respuestas
-    }
-
-    console.log(idLinks)
-
-    function cambiarFotoInicio() {
-
-        for (let j = 0; j < 16; j++) {
-            let picture = document.getElementById(`img${j}`);
-            picture.src = "./styles/scss/Assets/Seeds.png";
+        let personajeImgHtml = document.createElement('img')
+        personajeImgHtml.classList.add("img-fluid")
+        if(this.revelada){
+            personajeImgHtml.setAttribute('src', this.foto)
+        }else{
+            personajeImgHtml.setAttribute('src', this.fotoTapadaSrc)
         }
-    }
-    cambiarFotoInicio()
+        personajeImgHtml.setAttribute("data-idFoto", this.idDom)
+        personajeImgHtml.setAttribute("data-linkFoto", this.foto)
+        personajeImgHtml.id = `img${this.idDom}`;
+        card.appendChild(personajeImgHtml)
 
-    async function cambiarfotoall() {
-
-        for (let j = 0; j < 16; j++) {
-            let picture = document.getElementById(`img${j}`);
-            picture.src = arrayPersonajes[j].foto;
-        }
-
-        console.log(arrayPersonajes)
-    }
-    document.querySelector("#botonEmpezar").addEventListener("click", cambiarfotoall)
-
-    function almacenarIDcarta() {
-        let id = this.getAttribute('data-idFoto')
-        arrayIdFotos.push(id)
-
-        if (arrayIdFotos.length === 2) {
-            matchCard()
-            arrayIdFotos = []
-            //------------------------Voltear tras seleccionar 2:--------------------------------
-            for (let i = 0; i < idLinks.length; i++) {
-                document.getElementById(idLinks[i]).removeEventListener("click", voltear);
-            }
-            //---------------------------------------------------------------------------------
-
-        } else if (arrayIdFotos.length > 3) {
-            arrayIdFotos = []
-
-        }
-
+        return card;
     }
 
-    function parejas() {
-        let id = this.getAttribute('data-idFoto')
-
-        arrayIdFotos.push(id)
-        
-        if (arrayIdFotos.length === 2) {
-            function voltear() {
-                let thisLink = this.getAttribute('data-linkFoto');
-                this.setAttribute('src', thisLink)
-            }
-            arrayIdFotos = []
-            //------------------------Voltear tras seleccionar 2:--------------------------------
-
-            //---------------------------------------------------------------------------------
-
-        } else if (arrayIdFotos.length > 3) {
-            arrayIdFotos = []
-
-        }
-    }
-
-
-
-
-    function tapar() {
-
-        let thisLink = this.getAttribute('data-linkFoto')
-        this.setAttribute('src', "./styles/scss/Assets/Seeds.png")
-        console.log(thisLink)
-    }
-
-    function matchCard() {
-
-        let atributoIdImg = []
-
-        if (arrayFotosMatcheadas.includes(arrayIdFotos[0])) {
-            for (let i = 0; i < arrayPersonajes.length; i++) {
-
-                if (arrayPersonajes[i].idFoto === arrayIdFotos[i]) {
-                    atributoIdImg.push(i)
-                }
-            }
-
-            let fotoSelect1 = document.getElementById(`img${atributoIdImg[0]}`)
-            let fotoSelect2 = document.getElementById(`img${atributoIdImg[1]}`)
-
-            fotoSelect1.removeEventListener("click", almacenarIDcarta);
-            fotoSelect2.removeEventListener("click", almacenarIDcarta);
-
-
-
-        } else if (arrayIdFotos[0] === arrayIdFotos[1]) {
-            console.log(`Match!`)
-            arrayFotosMatcheadas.push(arrayIdFotos[0])
-
-        } else if (arrayFotosMatcheadas.length === 7) {
-            console.log(`Has superado el juego`)
-
-        } else {
-            console.log(`no match`)
-        }
-
-
+    voltear(){
+        this.revelada = !this.revelada
     }
 }
 
+function shuffle(array){
+    return array
+        .map(a => [Math.random(), a])
+        .sort((a, b) => a[0] - b[0])
+        .map(a => a[1]);
+}
 
-
-
-
-// funcion que hace que al hacer click en comenzar se muestren las imagenes que vamos a tener que identificar
-/* async function cambiarfotoall() {
-    let arrayPersonaje = await shuffleArrayElements()
-
-    for (let j = 0; j < 16; j++) {
-        let picture = document.getElementById(`img${j}`);
-        console.log(arrayPersonaje[j].foto)
-        picture.src = arrayPersonaje[j].foto;
+class Juego{
+    constructor(){
+        this.tablero = [];
+        this.volteadas = [];
+        this.correctas =[];
     }
 
-    console.log(arrayPersonaje)
-} */
+    comenzar(){
+        getRandomCharacter()
+        .then(cartas => shuffle(cartas))
+        .then(cartas => this.tablero = this.getCartasTablero(cartas))
+        .then(() => this.pintar())
+    }
+
+    getCartasTablero(cartas){
+        let result = []
+    
+        for(let i = 0; i<cartas.length; i++){
+            result.push(new CartaTablero(cartas[i].id, cartas[i].foto, i))
+        }
+        
+        return result
+    }    
+
+    pintar(){
+        document.getElementById("tablero").innerHTML = ""
+        for (let i = 0; i < this.tablero.length; i++) {
+            
+            let card = this.tablero[i].getHtml()
+    
+            document.getElementById("tablero").appendChild(card)
+
+            if(!this.correctas.includes(this.tablero[i])){
+                card.addEventListener('click', () => {
+                    if(this.volteadas.length < 2){
+                        this.tablero[i].voltear()
+                        this.volteadas.push(this.tablero[i])
+                        this.pintar()
+                    }
+                })
+            }
+        }
+        this.resolverMatches()
+    }
+
+    resolverMatches(){
+        if(this.volteadas.length > 0){
+            if(this.volteadas[0].parId === this.volteadas[1].parId){
+                console.log(`match!`)
+                this.correctas.push(this.volteadas[0])
+                this.correctas.push(this.volteadas[1])
+                console.log(this.correctas)
+                this.volteadas = []
+                this.pintar()
+                this.resolverPartida(this.correctas)
+            }else{
+                this.volteadas[0].voltear()
+                this.volteadas[1].voltear()
+                this.volteadas = []
+            }    
+        }
+    }
+
+    resolverPartida(correctas){
+        if(correctas.length >15){
+            console.log(`Has ganadado el juego`);
+            let div = document.getElementById("infoJuegoFinalizado");
+            div.style.display = "block"
+        }
+    }
+
+    timerCambiarAll() {
+        setTimeout(function () {
+            for (let j = 0; j < cartas.length; j++) {
+                let picture = document.getElementById(`img${j}`);
+                picture.src = "./styles/scss/Assets/Seeds.png";
+            }
+        }, 2000)
+    }
+
+    
+}
 
 
 // Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
-function timerCambiarAll() {
+function 
+
+timerCambiarAll() {
     setTimeout(function () {
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
@@ -291,10 +232,8 @@ function timerCambiarAll() {
         }
     }, 2000)
 }
+//document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
 
+let juego = new Juego()
 
-
-
-document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
-
-window.onload = crearDisposicionTarjeta()
+window.onload = juego.comenzar()
