@@ -221,8 +221,11 @@ class Juego{
         
     }    
       
-   
-
+  /*   reiniciarJuego(){
+        let nuevoJuego = new Juego();
+        window.onload = nuevoJuego.comenzar()
+    }
+ */
 }
 
 
@@ -245,6 +248,15 @@ function mostrarTodasCards(){
 
 }
 
+
 let juego = new Juego()
 document.querySelector("#botonEmpezar").addEventListener("click",mostrarTodasCards)
+
 window.onload = juego.comenzar()
+
+
+
+document.getElementById("botonReiniciar").addEventListener('click',reinicio)
+function reinicio(){
+    window.onload = juego.comenzar()
+}
