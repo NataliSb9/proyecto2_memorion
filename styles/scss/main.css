@@ -20,6 +20,17 @@ section {
 }
 
 /***Button***/
+.botonesJuego {
+  display: flex;
+  justify-content: center;
+}
+
+.botonesJuego div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 #botonReiniciar {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -125,9 +136,31 @@ section {
   color: #f0f0f0;
 }
 
+img {
+  width: 15.28rem;
+  height: 15rem;
+}
+
 .card {
   border-radius: 25rem;
   margin-top: 2rem;
+}
+
+.cardCustom {
+  padding: 0;
+  margin: 1.21rem;
+  border-color: black;
+  border-width: 3px;
+  border-style: solid;
+  box-shadow: 5px 5px 5px black;
+}
+
+.card-img-top {
+  width: 15.28rem;
+  height: 15rem;
+  -o-object-fit: cover;
+  object-fit: cover;
+  background-size: cover;
 }
 
 .cards-list {
@@ -136,21 +169,6 @@ section {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-}
-
-.card-img-top {
-  width: 100%;
-  height: 15vw;
-  -o-object-fit: cover;
-  object-fit: cover;
-}
-
-.cardCustom {
-  margin: 2vh;
-  border-color: black;
-  border-width: 3px;
-  border-style: solid;
-  box-shadow: 5px 5px 5px black;
 }
 
 div#acabarJuego {
@@ -169,7 +187,10 @@ div#infojuego,
 
 h1 {
   margin: 0 auto;
+  padding-top: 1rem;
+  margin-right: 1.5rem;
   font-weight: 300;
+  font-size: 3rem;
   text-shadow: 2px 2px 3px white;
   margin-bottom: 2vh;
   color: chartreuse;
@@ -180,11 +201,44 @@ h5 {
   color: black;
 }
 
+div#acabarJuego {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+div.setName {
+  margin: 2vh auto;
+  font-weight: 100;
+}
+
+div.utilidades {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+h1 {
+  margin: 0 auto;
+  font-weight: 300;
+  text-shadow: 2px 2px 3px white;
+  margin-bottom: 2vh;
+  color: chartreuse;
+}
+
 #infoJuegoFinalizado {
   display: none;
 }
 
+img#imgundefined {
+  height: 20vh;
+  width: 20vw;
+}
+
 .msjFinal {
+  font-size: 3rem;
+  font-weight: 100;
+  text-shadow: 2px 2px 3px chartreuse;
+  margin-bottom: 2vh;
+  color: white;
   font-size: 3rem;
   font-weight: 100;
   text-shadow: 2px 2px 3px chartreuse;
@@ -194,4 +248,46 @@ h5 {
 
 .texto-instrucciones {
   color: black;
+}
+
+.setName {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0 auto;
+  font-weight: 300;
+  text-shadow: 1px 1px 3px white;
+  margin-bottom: 2vh;
+  color: chartreuse;
+}
+
+label.setname {
+  margin-bottom: 0;
+}
+
+div#hms {
+  font-weight: 300;
+  text-shadow: 1px 1px 3px white;
+  margin-bottom: 2vh;
+  color: chartreuse;
+}
+
+input#playerName {
+  background-color: #A6EEE6FF;
+  border-radius: 3px;
+  border-color: black;
+  border: solid;
+  border-width: 3px;
+}
+
+#msjRanking, ol {
+  margin: 0 auto;
+  font-weight: 300;
+  text-shadow: 1px 1px 3px white;
+  margin-bottom: 2vh;
+  color: chartreuse;
+}
+
+div#scoreBoard {
+  display: flex;
+  flex-flow: wrap column;
 }/*# sourceMappingURL=main.css.map */
