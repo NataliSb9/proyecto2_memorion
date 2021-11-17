@@ -204,7 +204,7 @@ div.setName {
   font-weight: 100;
 }
 
-div.utilidades {
+div.utilidades  {
   display: flex;
   flex-flow: column wrap;
 
@@ -275,3 +275,15 @@ input#playerName{
   border-width:3px ;
 }
 
+#msjRanking, ol {
+  margin:0 auto;
+  font-weight: 300;
+  text-shadow: 1px 1px 3px white;
+  margin-bottom: 2vh;
+  color: chartreuse;
+}
+
+div#scoreBoard{
+display: flex;
+flex-flow: wrap column;
+}

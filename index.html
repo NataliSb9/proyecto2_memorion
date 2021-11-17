@@ -36,11 +36,11 @@
             <div class="modal-body texto-instrucciones">
               <p>Pon a prueba tu memoria!!</p>
               <p>La clave de este juego está en emparejar las parejas y para ello tienes que:</p>
-               <ul>
-                 <li>Clicar sobre una imagen pero ojo! tienes que recordar que imagen has clicado.</li>
-                 <li>Clicar otra imagen. Si las imagenes coinciden ambas se quedarán bocarriba.</li>
-                 <li>El juego estará completo cuando todas la imágenes estén emparejadas.</li>
-               </ul>
+              <ul>
+                <li>Clicar sobre una imagen pero ojo! tienes que recordar que imagen has clicado.</li>
+                <li>Clicar otra imagen. Si las imagenes coinciden ambas se quedarán bocarriba.</li>
+                <li>El juego estará completo cuando todas la imágenes estén emparejadas.</li>
+              </ul>
 
             </div>
             <div class="modal-footer">
@@ -61,7 +61,7 @@
       <div class="setName">
         <label for="Nombre" class="setName">Introduce tu nombre aqui:</label><br>
         <input type="text" name="Nombre" id="playerName"></div>
-        
+
       <div class="cronometro">
         <div id="hms"></div>
       </div>
@@ -73,7 +73,16 @@
       <div id="acabarJuego" class="">
         <div id="infoJuegoFinalizado">
           <p class="msjFinal"> Juego finalizado!! Has conseguido acabarlo en: <strong id="tiempoPartida"></strong></p>
-
+          <div id="scoreBoard">
+            <p id="msjRanking"></p>
+            <ol>
+              <li id="p1"></li>
+              <li id="p2"></li>
+              <li id="p3"></li>
+              <li id="p4"></li>
+              <li id="p5"></li>
+            </ol>
+          </div>
         </div>
         <section id="tablero" class="wraper"></section>
       </div>
@@ -84,8 +93,8 @@
 
   <!-- JS Propio -->
   <!--  <script src="./js/main.js"></script>  -->
-  
-  
+
+
   <script src="./js/storaje.js"></script>
   <script src="./GetApi.js"></script>
   <script src="./js/Crono.js"></script>
