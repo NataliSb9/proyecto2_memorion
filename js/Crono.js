@@ -31,6 +31,7 @@ function escribir(){
     if (h<10){hAux="0"+h;}else{hAux=h;}
 
     let registro= hAux + ":" + mAux + ":" + sAux; 
+    console.log(registro)
 
     document.getElementById("hms").innerHTML = registro; 
 }
