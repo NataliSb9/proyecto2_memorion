@@ -205,6 +205,8 @@ class Juego{
             console.log(`Has ganadado el juego`);
             let div = document.getElementById("infoJuegoFinalizado");
             div.style.display = "block"
+            parar()
+            document.querySelector("#tiempoPartida").innerHTML=registroOut;
         }
     }
 
@@ -221,17 +223,20 @@ class Juego{
 }
 
 
-// Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
-function 
+/* Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
+function */
 
-timerCambiarAll() {
+function timerCambiarAll() {
     setTimeout(function () {
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
             picture.src = "./styles/scss/Assets/Seeds.png";
+
         }
     }, 2000)
 }
+
+
 //document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
 
 let juego = new Juego()

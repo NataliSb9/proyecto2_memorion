@@ -19,6 +19,7 @@ function cronometrar(){
 }
 
 // funcion para imprimir el cambio de tiempo en pantalla, teniendo en cuenta que las decimas y centesimas se tienen que definir de distinta manera ( No se admiten numeros de dos cifras en js)
+let registroOut=[];
 function escribir(){
     let hAux, mAux, sAux;
     s++;
@@ -31,16 +32,17 @@ function escribir(){
     if (h<10){hAux="0"+h;}else{hAux=h;}
 
     let registro= hAux + ":" + mAux + ":" + sAux; 
-
+    registroOut=registro; 
     document.getElementById("hms").innerHTML = registro; 
 }
-/*Para parar el crono y poder continuar cuando queramos
+//Para parar el crono y poder continuar cuando queramos
 function parar(){
     clearInterval(id);
-    document.querySelector(".start").addEventListener("click",cronometrar);
 
+    //document.querySelector(".start").addEventListener("click",cronometrar);
+return registroOut;
 }
-
+/*
 // Funcion para reiniciar el conteo:
 function reiniciar(){
     clearInterval(id);

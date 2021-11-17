@@ -8,6 +8,9 @@ article {
   body{
     display: flex;
     flex-flow: column wrap;
+    background-image: url(./Assets/wallpaper_rick.jpg);background-repeat: no-repeat; 
+    background-size: cover;
+    color: white;
   }
   
   section {
@@ -36,52 +39,43 @@ article {
   }
   .cardCustom {
     margin: 2vh ;
-    border-width: 3px black ;
+    border-color: black;
+    border-width: 3px  ;
     border-style: solid;
     box-shadow: 5px 5px 5px black;
   }
-  
-  div.cronometro,div.utilidades,div#hms {
-    margin:0 auto;
+
+  div#acabarJuego{
+      display: flex;
+      flex-flow: column wrap;
   }
   
-  
+  div.cronometro,div.utilidades,div#hms,div#infojuego,.msjFinal {
+    margin:0 auto;
+    margin-bottom: 2vh;
+  }
   
   h1{
     margin:0 auto;
   font-weight: 300;
-  text-shadow:2px 2px chartreuse;
+  text-shadow:2px 2px 3px white;
+  margin-bottom: 2vh;
+  color: chartreuse;
   
-  }
   
-
-
+}
 #infoJuegoFinalizado{
     display:none;
 }
 
 
-/*# sourceMappingURL=main.css.map */
 
-/* .cardCustom {
-    margin: 30px auto;
-    width: 300px;
-    height: 300px;
-    border-radius: 40px;
-    box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
-    cursor: pointer;
-    transition: 0.4s;
+.msjFinal {
+    font-size: 3rem;
+    font-weight:100 ;
+    text-shadow:2px 2px 3px chartreuse;
+  margin-bottom: 2vh;
+  color: white;
 }
 
-.cardCustom .card_image {
-    width: inherit;
-    height: inherit;
-    border-radius: 40px;
-}
 
-img {
-    width: 10rem;
-    height: 15rem;
-        border-radius: 40px;
-    object-fit: cover;
-}  */
