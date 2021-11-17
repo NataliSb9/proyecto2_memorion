@@ -104,7 +104,7 @@ class CartaTablero {
         this.revelada = false;
     }
 
-    getHtml(){
+    getHtml() {
         let card = document.createElement("div");
         card.id = `card${this.idDom}`
         card.classList.add("cardCustom");
@@ -112,9 +112,9 @@ class CartaTablero {
 
         let personajeImgHtml = document.createElement('img')
         personajeImgHtml.classList.add("img-fluid")
-        if(this.revelada){
+        if (this.revelada) {
             personajeImgHtml.setAttribute('src', this.foto)
-        }else{
+        } else {
             personajeImgHtml.setAttribute('src', this.fotoTapadaSrc)
         }
         personajeImgHtml.setAttribute("data-idFoto", this.idDom)
@@ -125,53 +125,54 @@ class CartaTablero {
         return card;
     }
 
-    voltear(){
+    voltear() {
         this.revelada = !this.revelada
     }
 }
 
-function shuffle(array){
+function shuffle(array) {
     return array
         .map(a => [Math.random(), a])
         .sort((a, b) => a[0] - b[0])
         .map(a => a[1]);
 }
 
-class Juego{
-    constructor(){
+class Juego {
+    constructor() {
         this.tablero = [];
         this.volteadas = [];
-        this.correctas =[];
+        this.correctas = [];
     }
 
-    comenzar(){
+    comenzar() {
         getRandomCharacter()
-        .then(cartas => shuffle(cartas))
-        .then(cartas => this.tablero = this.getCartasTablero(cartas))
-        .then(() => this.pintar())
+            .then(cartas => shuffle(cartas))
+            .then(cartas => this.tablero = this.getCartasTablero(cartas))
+            .then(() => this.pintar())
+            .then(() => document.querySelector("#botonEmpezar").addEventListener("click", this.timerCambiarAll))
     }
 
-    getCartasTablero(cartas){
+    getCartasTablero(cartas) {
         let result = []
-    
-        for(let i = 0; i<cartas.length; i++){
+
+        for (let i = 0; i < cartas.length; i++) {
             result.push(new CartaTablero(cartas[i].id, cartas[i].foto, i))
         }
-        
-        return result
-    }    
 
-    pintar(){
+        return result
+    }
+
+    pintar() {
         document.getElementById("tablero").innerHTML = ""
         for (let i = 0; i < this.tablero.length; i++) {
-            
+
             let card = this.tablero[i].getHtml()
-    
+
             document.getElementById("tablero").appendChild(card)
 
-            if(!this.correctas.includes(this.tablero[i])){
+            if (!this.correctas.includes(this.tablero[i])) {
                 card.addEventListener('click', () => {
-                    if(this.volteadas.length < 2){
+                    if (this.volteadas.length < 2) {
                         this.tablero[i].voltear()
                         this.volteadas.push(this.tablero[i])
                         this.pintar()
@@ -182,9 +183,9 @@ class Juego{
         this.resolverMatches()
     }
 
-    resolverMatches(){
-        if(this.volteadas.length > 0){
-            if(this.volteadas[0].parId === this.volteadas[1].parId){
+    resolverMatches() {
+        if (this.volteadas.length > 0) {
+            if (this.volteadas[0].parId === this.volteadas[1].parId) {
                 console.log(`match!`)
                 this.correctas.push(this.volteadas[0])
                 this.correctas.push(this.volteadas[1])
@@ -192,39 +193,44 @@ class Juego{
                 this.volteadas = []
                 this.pintar()
                 this.resolverPartida(this.correctas)
-            }else{
+            } else {
                 this.volteadas[0].voltear()
                 this.volteadas[1].voltear()
                 this.volteadas = []
-            }    
+            }
         }
     }
 
-    resolverPartida(correctas){
-        if(correctas.length >15){
+    resolverPartida(correctas) {
+        if (correctas.length > 15) {
             console.log(`Has ganadado el juego`);
             let div = document.getElementById("infoJuegoFinalizado");
             div.style.display = "block"
             parar()
-            document.querySelector("#tiempoPartida").innerHTML=registroOut;
+            document.querySelector("#tiempoPartida").innerHTML = registroOut;
         }
     }
 
     timerCambiarAll() {
-        setTimeout(function () {
-            for (let j = 0; j < cartas.length; j++) {
-                let picture = document.getElementById(`img${j}`);
-                picture.src = "./styles/scss/Assets/Seeds.png";
-            }
-        }, 2000)
+        let cartas=document.getElementById("tablero")
+        for (let i = 0; i < cartas.length; i++) {
+            () => {
+                cartas[i].voltear()
+                this.volteadas.push(cartas[i])
+                this.pintar()
+
+            } 
+            
+        }
+        console.log(cartas)
     }
 
-    
+
 }
 
 
 /* Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
-function */
+function 
 
 function timerCambiarAll() {
     setTimeout(function () {
@@ -235,9 +241,10 @@ function timerCambiarAll() {
         }
     }, 2000)
 }
+*/
 
 
-//document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
+
 
 let juego = new Juego()
 

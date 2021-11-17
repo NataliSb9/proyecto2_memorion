@@ -15,7 +15,7 @@ function cronometrar(){
     setTimeout(function(){
     escribir();
     id = setInterval(escribir,1000);
-    document.querySelector("#botonEmpezar").removeEventListener("click",cronometrar);},3000)
+    document.querySelector("#botonEmpezar").removeEventListener("click",cronometrar);},0000)
 }
 
 // funcion para imprimir el cambio de tiempo en pantalla, teniendo en cuenta que las decimas y centesimas se tienen que definir de distinta manera ( No se admiten numeros de dos cifras en js)

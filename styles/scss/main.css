@@ -26,7 +26,7 @@ section {
 
 .cards-list {
   z-index: 0;
-  width: 100%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -40,6 +40,7 @@ section {
 }
 
 .cardCustom {
+  padding: 0;
   margin: 2vh;
   border-color: black;
   border-width: 3px;
@@ -67,6 +68,11 @@ h1 {
 
 #infoJuegoFinalizado {
   display: none;
+}
+
+img#imgundefined {
+  height: 20vh;
+  width: 20vw;
 }
 
 .msjFinal {
