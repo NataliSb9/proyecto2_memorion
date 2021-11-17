@@ -1,18 +1,18 @@
-article {
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+/* article {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 body {
-  display: flex;
-  flex-flow: column wrap;
+    display: flex;
+    flex-flow: column wrap;
 }
 
 section {
-  display: grid;
-  grid-template-columns: 18rem 18rem 18rem 18rem;
+    display: grid;
+    grid-template-columns: 18rem 18rem 18rem 18rem;
 }
 
 /*****Buton*****/
