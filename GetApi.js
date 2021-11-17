@@ -226,18 +226,6 @@ class Juego{
 }
 
 
-/* Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
-function */
-
-/* function timerCambiarAll() {
-    setTimeout(function () {
-        for (let j = 0; j < 16; j++) {
-            let picture = document.getElementById(`img${j}`);
-            picture.src = "./styles/scss/Assets/Seeds.png";
-
-        }
-    }, 2000)
-} */
 
 function mostrarTodasCards(){
 
