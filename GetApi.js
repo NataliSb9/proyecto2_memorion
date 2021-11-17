@@ -258,6 +258,7 @@ window.onload = juego.comenzar()
 
 
 document.getElementById("botonReiniciar").addEventListener('click',reinicio)
+document.getElementById("botonReiniciar").addEventListener('click',mostrarTodasCards)
 
 function reinicio(){
     window.onload = juego.comenzar()
