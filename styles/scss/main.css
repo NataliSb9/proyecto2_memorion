@@ -279,7 +279,8 @@ input#playerName {
   border-width: 3px;
 }
 
-#msjRanking, ol {
+#msjRanking,
+ol {
   margin: 0 auto;
   font-weight: 300;
   text-shadow: 1px 1px 3px white;

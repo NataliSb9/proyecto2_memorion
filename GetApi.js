@@ -1,4 +1,3 @@
-
 // creo la clase Carta para asignar atributos a cada una de las Cartas que vamos a mostrar:
 class Carta {
     constructor(id, foto, nombre) {
@@ -110,7 +109,7 @@ class CartaTablero {
         card.id = `card${this.idDom}`
         card.classList.add("cardCustom");
         card.classList.add("card-image");
-      
+
         let personajeImgHtml = document.createElement('img')
         //personajeImgHtml.classList.add("img-fluid")
         if (this.revelada) {
@@ -122,7 +121,7 @@ class CartaTablero {
         personajeImgHtml.setAttribute("data-linkFoto", this.foto)
         personajeImgHtml.id = `img${this.idDom}`;
         card.appendChild(personajeImgHtml)
-       
+
 
         return card;
     }
@@ -143,7 +142,7 @@ class Juego {
     constructor() {
         this.tablero = [];
         this.volteadas = [];
-        this.correctas =[];
+        this.correctas = [];
         this.tableroActivo = false;
     }
 
@@ -152,15 +151,15 @@ class Juego {
             .then(cartas => shuffle(cartas))
             .then(cartas => this.tablero = this.getCartasTablero(cartas))
             .then(() => this.pintar())
-            
+
     }
 
     getCartasTablero(cartas) {
         let result = []
-    
-        for(let i = 0; i<cartas.length; i++){
-            let idDom= i; 
-            result.push(new CartaTablero(cartas[i].id, cartas[i].foto,cartas[i].nombre ,idDom))
+
+        for (let i = 0; i < cartas.length; i++) {
+            let idDom = i;
+            result.push(new CartaTablero(cartas[i].id, cartas[i].foto, cartas[i].nombre, idDom))
         }
 
         return result
@@ -170,25 +169,25 @@ class Juego {
         document.getElementById("tablero").innerHTML = ""
         for (let i = 0; i < this.tablero.length; i++) {
 
-           
+
             let card = this.tablero[i].getHtml()
 
             document.getElementById("tablero").appendChild(card)
-           if(this.tableroActivo === true){
-                if(!this.correctas.includes(this.tablero[i])){
+            if (this.tableroActivo === true) {
+                if (!this.correctas.includes(this.tablero[i])) {
                     card.addEventListener('click', () => {
-                        if(this.volteadas.length < 2){
+                        if (this.volteadas.length < 2) {
                             this.tablero[i].voltear()
                             this.volteadas.push(this.tablero[i])
                             this.pintar()
                         }
                     })
                 }
-            }     
-            
+            }
+
         }
         this.resolverMatches()
-       
+
     }
 
     resolverMatches() {
@@ -220,7 +219,7 @@ class Juego {
         }
     }
 
-    activarTablero(){
+    activarTablero() {
         this.tableroActivo = !this.tableroActivo;
         this.pintar()
     }
@@ -230,19 +229,19 @@ class Juego {
 
 
 
-function mostrarTodasTarjetas(){
-    
-    setTimeout( () => {
-        
-        for(let i =0; i< juego.tablero.length; i++){
+function mostrarTodasTarjetas() {
+
+    setTimeout(() => {
+
+        for (let i = 0; i < juego.tablero.length; i++) {
             juego.tablero[i].revelada = true;
             juego.pintar()
         }
     }, 1000)
 
 
-    setTimeout( () => {
-        for(let i =0; i< juego.tablero.length; i++){
+    setTimeout(() => {
+        for (let i = 0; i < juego.tablero.length; i++) {
             juego.tablero[i].revelada = false;
             juego.pintar()
         }
@@ -254,15 +253,15 @@ function mostrarTodasTarjetas(){
 let juego = new Juego()
 
 /***EVENTOS DEL BOTON EMPEZAR***/
-document.querySelector("#botonEmpezar").addEventListener("click",mostrarTodasTarjetas)
-document.querySelector("#botonEmpezar").addEventListener("click",desbloquearCartas)
+document.querySelector("#botonEmpezar").addEventListener("click", mostrarTodasTarjetas)
+document.querySelector("#botonEmpezar").addEventListener("click", desbloquearCartas)
 
 
 
 
 window.onload = juego.comenzar()
 
-function desbloquearCartas(){
+function desbloquearCartas() {
     juego.activarTablero()
 
 }
@@ -270,12 +269,12 @@ function desbloquearCartas(){
 /***EVENTOS DEL BOTON REINICIAR***/
 
 
-document.getElementById("botonReiniciar").addEventListener('click',reinicio)
+document.getElementById("botonReiniciar").addEventListener('click', reinicio)
 
-document.getElementById("botonReiniciar").addEventListener('click',mostrarTodasTarjetas)
+document.getElementById("botonReiniciar").addEventListener('click', mostrarTodasTarjetas)
 
 
-function reinicio(){
+function reinicio() {
     window.onload = juego.comenzar()
 
 }
