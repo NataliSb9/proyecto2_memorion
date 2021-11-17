@@ -170,7 +170,6 @@ class Juego {
             let card = this.tablero[i].getHtml()
 
             document.getElementById("tablero").appendChild(card)
-            console.log("pintar")
             if(!this.correctas.includes(this.tablero[i])){
                 card.addEventListener('click', () => {
                     if (this.volteadas.length < 2) {

@@ -44,6 +44,7 @@ function escribir(){
 function parar(){
     clearInterval(id);
     enviarDatos();
+    leerDatos();
     //document.querySelector(".start").addEventListener("click",cronometrar);
 return registroOut,tiempoCrono;
 }
