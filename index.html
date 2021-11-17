@@ -20,20 +20,27 @@
 
   <article>
     <div class="utilidades">
-      
-        <div class="cronometro">
-          <div id="hms"></div>
-        </div>
-     
-       <input type="button" name="Empezar" id="botonEmpezar" value="Comenzar"> 
+
+      <div class="setName">
+        <label for="Nombre" class="setName">Introduce tu nombre aqui:</label><br>
+        <input type="text" name="Nombre" id="playerName"></div>
+        
     </div>
+
+      <div class="cronometro">
+        <div id="hms"></div>
+      </div>
+
+      <input type="button" name="Empezar" id="botonEmpezar" value="Comenzar"> <br>
+
+      
     <div class="cards-list">
-      <div id="acabarJuego" class ="">
+      <div id="acabarJuego" class="">
         <div id="infoJuegoFinalizado">
           <p class="msjFinal"> Juego finalizado!! Has conseguido acabarlo en: <strong id="tiempoPartida"></strong></p>
-          
+
         </div>
-        <section id="tablero" class ="wraper"></section>
+        <section id="tablero" class="wraper"></section>
       </div>
     </div>
 
@@ -47,6 +54,9 @@
 
   <!-- JS Propio -->
   <!--  <script src="./js/main.js"></script>  -->
+  
+  
+  <script src="./js/storaje.js"></script>
   <script src="./GetApi.js"></script>
   <script src="./js/Crono.js"></script>
 

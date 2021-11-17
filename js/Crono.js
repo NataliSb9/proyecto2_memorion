@@ -20,6 +20,7 @@ function cronometrar(){
 
 // funcion para imprimir el cambio de tiempo en pantalla, teniendo en cuenta que las decimas y centesimas se tienen que definir de distinta manera ( No se admiten numeros de dos cifras en js)
 let registroOut=[];
+let tiempoCrono=[];
 function escribir(){
     let hAux, mAux, sAux;
     s++;
@@ -31,6 +32,10 @@ function escribir(){
     if (m<10){mAux="0"+m;}else{mAux=m;}
     if (h<10){hAux="0"+h;}else{hAux=h;}
 
+
+    tiempoCrono[0]=s;
+    tiempoCrono[1]=m;
+    tiempoCrono[2]=h;
     let registro= hAux + ":" + mAux + ":" + sAux; 
     registroOut=registro; 
     document.getElementById("hms").innerHTML = registro; 
@@ -38,9 +43,9 @@ function escribir(){
 //Para parar el crono y poder continuar cuando queramos
 function parar(){
     clearInterval(id);
-
+    enviarDatos();
     //document.querySelector(".start").addEventListener("click",cronometrar);
-return registroOut;
+return registroOut,tiempoCrono;
 }
 /*
 // Funcion para reiniciar el conteo:

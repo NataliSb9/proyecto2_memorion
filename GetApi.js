@@ -149,7 +149,7 @@ class Juego {
             .then(cartas => shuffle(cartas))
             .then(cartas => this.tablero = this.getCartasTablero(cartas))
             .then(() => this.pintar())
-            .then(() => document.querySelector("#botonEmpezar").addEventListener("click", this.timerCambiarAll))
+            
     }
 
     getCartasTablero(cartas) {
@@ -208,10 +208,11 @@ class Juego {
             div.style.display = "block"
             parar()
             document.querySelector("#tiempoPartida").innerHTML = registroOut;
+            //enviarDatos()
         }
     }
 
-    timerCambiarAll() {
+    /* timerCambiarAll() {
         let cartas=document.getElementById("tablero")
         for (let i = 0; i < cartas.length; i++) {
             () => {
@@ -223,7 +224,7 @@ class Juego {
             
         }
         console.log(cartas)
-    }
+    } */
 
 
 }

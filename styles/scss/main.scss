@@ -1,86 +1,107 @@
 article {
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-  
-  body{
-    display: flex;
-    flex-flow: column wrap;
-    background-image: url(./Assets/wallpaper_rick.jpg);background-repeat: no-repeat; 
-    background-size: cover;
-    color: white;
-  }
-  
-  section {
-    display: grid;
-    grid-template-columns: 18rem 18rem 18rem 18rem;
-  }
-  
-  .card {
-    border-radius: 25rem;
-    margin-top: 2rem;
-  }
-  
-  .cards-list {
-    z-index: 0;
-    margin:0 auto;
-    
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .card-img-top {
-    width: 100%;
-    height: 15vw;
-    -o-object-fit: cover;
-    object-fit: cover;
-  }
-  .cardCustom {
-    padding:0;
-    margin: 2vh ;
-    border-color: black;
-    border-width: 3px  ;
-    border-style: solid;
-    box-shadow: 5px 5px 5px black;
-  }
-
-  div#acabarJuego{
-      display: flex;
-      flex-flow: column wrap;
-  }
-  
-  div.cronometro,div.utilidades,div#hms,div#infojuego,.msjFinal {
-    margin:0 auto;
-    margin-bottom: 2vh;
-  }
-  
-  h1{
-    margin:0 auto;
-  font-weight: 300;
-  text-shadow:2px 2px 3px white;
-  margin-bottom: 2vh;
-  color: chartreuse;
-  
-  
-}
-#infoJuegoFinalizado{
-    display:none;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-img#imgundefined {
-height: 20vh;
-width: 20vw;
-}
-
-.msjFinal {
-    font-size: 3rem;
-    font-weight:100 ;
-    text-shadow:2px 2px 3px chartreuse;
-  margin-bottom: 2vh;
+body {
+  display: flex;
+  flex-flow: column wrap;
+  background-image: url(./Assets/wallpaper_rick.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
 }
 
+section {
+  display: grid;
+  grid-template-columns: 18rem 18rem 18rem 18rem;
+}
 
+.card {
+  border-radius: 25rem;
+  margin-top: 2rem;
+}
+
+.cards-list {
+  z-index: 0;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.cardCustom {
+  padding: 0;
+  margin: 2vh;
+  border-color: black;
+  border-width: 3px;
+  border-style: solid;
+  box-shadow: 5px 5px 5px black;
+}
+
+div#acabarJuego {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+div.cronometro,
+div.utilidades,
+div#hms,
+div#infojuego,
+.msjFinal {
+  margin: 0 auto;
+  margin-bottom: 2vh;
+}
+
+#botonEmpezar {
+  margin: 0 auto;
+  width: 10vw;
+}
+
+div.setName {
+  margin: 2vh auto;
+  font-weight: 100;
+}
+
+div.utilidades {
+  display: flex;
+  flex-flow: column wrap;
+
+}
+
+h1 {
+  margin: 0 auto;
+  font-weight: 300;
+  text-shadow: 2px 2px 3px white;
+  margin-bottom: 2vh;
+  color: chartreuse;
+
+
+}
+
+#infoJuegoFinalizado {
+  display: none;
+}
+
+img#imgundefined {
+  height: 20vh;
+  width: 20vw;
+}
+
+.msjFinal {
+  font-size: 3rem;
+  font-weight: 100;
+  text-shadow: 2px 2px 3px chartreuse;
+  margin-bottom: 2vh;
+  color: white;
+}

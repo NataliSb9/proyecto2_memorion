@@ -53,9 +53,28 @@ div#acabarJuego {
   flex-flow: column wrap;
 }
 
-div.cronometro, div.utilidades, div#hms, div#infojuego, .msjFinal {
+div.cronometro,
+div.utilidades,
+div#hms,
+div#infojuego,
+.msjFinal {
   margin: 0 auto;
   margin-bottom: 2vh;
+}
+
+#botonEmpezar {
+  margin: 0 auto;
+  width: 10vw;
+}
+
+div.setName {
+  margin: 2vh auto;
+  font-weight: 100;
+}
+
+div.utilidades {
+  display: flex;
+  flex-flow: column wrap;
 }
 
 h1 {
