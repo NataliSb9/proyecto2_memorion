@@ -33,9 +33,9 @@ function escribir(){
     if (h<10){hAux="0"+h;}else{hAux=h;}
 
 
-    tiempoCrono[0]=s;
+    tiempoCrono[2]=s;
     tiempoCrono[1]=m;
-    tiempoCrono[2]=h;
+    tiempoCrono[0]=h;
     let registro= hAux + ":" + mAux + ":" + sAux; 
     registroOut=registro; 
     document.getElementById("hms").innerHTML = registro; 

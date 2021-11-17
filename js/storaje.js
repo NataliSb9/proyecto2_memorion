@@ -76,20 +76,10 @@ function leerDatos() {
 
     }
 
-    let segundos = [];
-    let minutos=[];
-
-    for (let j = 0; j < ranking.length; j++) {
-        segundos.push(ranking[j][1]);
-        minutos.push(ranking[j][2]);
-    }
-
+    let top5=ranking.sort();
 
     
-    let top5=segundos.sort();
-
-    
-    console.log(ranking)
+    console.log(ranking.sort())
     console.log(top5)
 
 
