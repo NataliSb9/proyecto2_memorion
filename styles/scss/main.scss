@@ -1,5 +1,5 @@
 article {
-    width: 100vw;
+    width: 95vw;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -15,8 +15,8 @@ body {
 }
 
 section {
-    display: grid;
-    grid-template-columns: 18rem 18rem 18rem 18rem;
+display: grid;
+grid-template-columns: 18rem 18rem 18rem 18rem;
 }
 
 /***Button***/
@@ -122,6 +122,8 @@ section {
     color: rgb(240, 240, 240);
 }
 
+
+
 .card {
     border-radius: 25rem;
     margin-top: 2rem;
@@ -150,6 +152,8 @@ section {
     box-shadow: 5px 5px 5px black;
 }
 
+
+
 div#acabarJuego {
     display: flex;
     flex-flow: column wrap;
@@ -164,12 +168,16 @@ div#infojuego,
     margin-bottom: 2vh;
 }
 
+
+
+
 h1 {
     margin: 0 auto;
     font-weight: 300;
     text-shadow: 2px 2px 3px white;
     margin-bottom: 2vh;
     color: chartreuse;
+    text-align: center;
 }
 
 h5{
@@ -192,3 +200,4 @@ h5{
 .texto-instrucciones{
     color: black
 }
+

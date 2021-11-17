@@ -110,7 +110,7 @@ class CartaTablero {
         card.id = `card${this.idDom}`
         card.classList.add("cardCustom");
         card.classList.add("card-image");
-
+      
         let personajeImgHtml = document.createElement('img')
         personajeImgHtml.classList.add("img-fluid")
         if(this.revelada){
@@ -122,6 +122,7 @@ class CartaTablero {
         personajeImgHtml.setAttribute("data-linkFoto", this.foto)
         personajeImgHtml.id = `img${this.idDom}`;
         card.appendChild(personajeImgHtml)
+       
 
         return card;
     }
@@ -143,6 +144,7 @@ class Juego{
         this.tablero = [];
         this.volteadas = [];
         this.correctas =[];
+        this.tableroActivo = false;
     }
 
     comenzar(){
@@ -156,7 +158,8 @@ class Juego{
         let result = []
     
         for(let i = 0; i<cartas.length; i++){
-            result.push(new CartaTablero(cartas[i].id, cartas[i].foto, i))
+            let idDom= i; 
+            result.push(new CartaTablero(cartas[i].id, cartas[i].foto,cartas[i].nombre ,idDom))
         }
         
         return result
@@ -169,16 +172,18 @@ class Juego{
             let card = this.tablero[i].getHtml()
     
             document.getElementById("tablero").appendChild(card)
-            console.log("pintar")
-            if(!this.correctas.includes(this.tablero[i])){
-                card.addEventListener('click', () => {
-                    if(this.volteadas.length < 2){
-                        this.tablero[i].voltear()
-                        this.volteadas.push(this.tablero[i])
-                        this.pintar()
-                    }
-                })
-            }
+           if(!this.tablero){
+                if(!this.correctas.includes(this.tablero[i])){
+                    card.addEventListener('click', () => {
+                        if(this.volteadas.length < 2){
+                            this.tablero[i].voltear()
+                            this.volteadas.push(this.tablero[i])
+                            this.pintar()
+                        }
+                    })
+                }
+            }     
+            
         }
         this.resolverMatches()
        
@@ -212,33 +217,26 @@ class Juego{
         }
     }
 
-
-
-    taparTodasCard(){
-        for(let i =0; i< this.tablero.length; i++){
-            this.tablero[i].revelada = false;
-            this.pintar()
-        }
-        
-    }    
-      
-  /*   reiniciarJuego(){
-        let nuevoJuego = new Juego();
-        window.onload = nuevoJuego.comenzar()
+    activarTarjetas(){
+        this.tableroActivo = true;
     }
- */
+
 }
 
+function desbloquearCartas(){
+    juego.activarTarjetas()
+}
 
-
-function mostrarTodasCards(){
-
+function mostrarTodasTarjetas(){
+    
     setTimeout( () => {
+        
         for(let i =0; i< juego.tablero.length; i++){
             juego.tablero[i].revelada = true;
             juego.pintar()
         }
     }, 1000)
+
 
     setTimeout( () => {
         for(let i =0; i< juego.tablero.length; i++){
@@ -251,14 +249,18 @@ function mostrarTodasCards(){
 
 
 let juego = new Juego()
-document.querySelector("#botonEmpezar").addEventListener("click",mostrarTodasCards)
+document.querySelector("#botonEmpezar").addEventListener("click",mostrarTodasTarjetas)
+
+document.querySelector("#botonEmpezar").addEventListener("click",desbloquearCartas)
+
+document.querySelector("#botonEmpezar").addEventListener("click",juego.activarTarjetas)
 
 window.onload = juego.comenzar()
 
 
 
 document.getElementById("botonReiniciar").addEventListener('click',reinicio)
-document.getElementById("botonReiniciar").addEventListener('click',mostrarTodasCards)
+document.getElementById("botonReiniciar").addEventListener('click',mostrarTodasTarjetas)
 
 function reinicio(){
     window.onload = juego.comenzar()

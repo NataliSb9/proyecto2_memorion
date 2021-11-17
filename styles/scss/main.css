@@ -1,5 +1,5 @@
 article {
-  width: 100vw;
+  width: 95vw;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -168,6 +168,7 @@ h1 {
   text-shadow: 2px 2px 3px white;
   margin-bottom: 2vh;
   color: chartreuse;
+  text-align: center;
 }
 
 h5 {

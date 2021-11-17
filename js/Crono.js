@@ -11,13 +11,15 @@ function init(){
     s = 0;
     document.getElementById("hms").innerHTML="00:00:00";
 }     
-// funcion para iniciar el cronometro:    
+// funcion para iniciar el cronometro:
+
 function cronometrar(){
     setTimeout(function(){
     escribir();
     id = setInterval(escribir,1000);
     document.querySelector("#botonEmpezar").removeEventListener("click",cronometrar);},8000)
 }
+
 
 // funcion para imprimir el cambio de tiempo en pantalla, teniendo en cuenta que las decimas y centesimas se tienen que definir de distinta manera ( No se admiten numeros de dos cifras en js)
 let registroOut=[];
@@ -41,7 +43,7 @@ function parar(){
     clearInterval(id);
 
     //document.querySelector(".start").addEventListener("click",cronometrar);
-return registroOut;
+    return registroOut;
 }
 /*
 // Funcion para reiniciar el conteo:
@@ -51,9 +53,13 @@ function reiniciar(){
     h=0;m=0;s=0;
     document.querySelector(".start").addEventListener("click",cronometrar); 
 }*/
-function reinicioCrono(){
+
+
+function reiniciar(){
     clearInterval(id);
-    init()
-    //document.querySelector(".start").addEventListener("click",cronometrar);
+    document.getElementById("hms").innerHTML="00:00:00";
+    h=0;m=0;s=0;
+    cronometrar()
+    
 }
-document.getElementById("botonReiniciar").addEventListener('click',reinicioCrono)
+document.getElementById("botonReiniciar").addEventListener('click',reiniciar)
