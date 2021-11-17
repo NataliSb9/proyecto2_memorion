@@ -164,11 +164,11 @@ class Juego{
     pintar(){
         document.getElementById("tablero").innerHTML = ""
         for (let i = 0; i < this.tablero.length; i++) {
-            
+           
             let card = this.tablero[i].getHtml()
     
             document.getElementById("tablero").appendChild(card)
-
+            console.log("pintar")
             if(!this.correctas.includes(this.tablero[i])){
                 card.addEventListener('click', () => {
                     if(this.volteadas.length < 2){
@@ -180,6 +180,7 @@ class Juego{
             }
         }
         this.resolverMatches()
+       
     }
 
     resolverMatches(){
@@ -210,23 +211,25 @@ class Juego{
         }
     }
 
-    timerCambiarAll() {
-        setTimeout(function () {
-            for (let j = 0; j < cartas.length; j++) {
-                let picture = document.getElementById(`img${j}`);
-                picture.src = "./styles/scss/Assets/Seeds.png";
-            }
-        }, 2000)
-    }
 
-    
+
+    taparTodasCard(){
+        for(let i =0; i< this.tablero.length; i++){
+            this.tablero[i].revelada = false;
+            this.pintar()
+        }
+        
+    }    
+      
+   
+
 }
 
 
 /* Funcion que hace que pasado un tiempo de 1 segundo se vuelvan a poner en oculto todas las cartas.
 function */
 
-function timerCambiarAll() {
+/* function timerCambiarAll() {
     setTimeout(function () {
         for (let j = 0; j < 16; j++) {
             let picture = document.getElementById(`img${j}`);
@@ -234,11 +237,26 @@ function timerCambiarAll() {
 
         }
     }, 2000)
+} */
+
+function mostrarTodasCards(){
+
+    setTimeout( () => {
+        for(let i =0; i< juego.tablero.length; i++){
+            juego.tablero[i].revelada = true;
+            juego.pintar()
+        }
+    }, 1000)
+
+    setTimeout( () => {
+        for(let i =0; i< juego.tablero.length; i++){
+            juego.tablero[i].revelada = false;
+            juego.pintar()
+        }
+    }, 8000)
+
 }
 
-
-//document.querySelector("#botonEmpezar").addEventListener("click", timerCambiarAll)
-
 let juego = new Juego()
-
+document.querySelector("#botonEmpezar").addEventListener("click",mostrarTodasCards)
 window.onload = juego.comenzar()
