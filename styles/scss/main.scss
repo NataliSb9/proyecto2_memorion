@@ -122,18 +122,24 @@ section {
     color: rgb(240, 240, 240);
 }
 
+// ------------------------------cards-----------------------------------------
+
+
+
 .card {
     border-radius: 25rem;
     margin-top: 2rem;
 }
 
-.cards-list {
-    z-index: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+.cardCustom {
+  padding: 0;
+  margin: 2vh;
+  border-color: black;
+  border-width: 3px;
+  border-style: solid;
+  box-shadow: 5px 5px 5px black;
 }
+
 
 .card-img-top {
     width: 100%;
@@ -142,13 +148,16 @@ section {
     object-fit: cover;
 }
 
-.cardCustom {
-    margin: 2vh;
-    border-color: black;
-    border-width: 3px;
-    border-style: solid;
-    box-shadow: 5px 5px 5px black;
+.cards-list {
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
+
+
+//----------------------------------------MISCELANEOS----------------------------------------------
 
 div#acabarJuego {
     display: flex;
@@ -176,48 +185,14 @@ h5{
     color: black;
 }
 
-#infoJuegoFinalizado {
-    display: none;
-}
 
-.cards-list {
-  z-index: 0;
-  margin: 0 auto;
-
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.card-img-top {
-  width: 100%;
-  height: 15vw;
-  -o-object-fit: cover;
-  object-fit: cover;
-}
-
-.cardCustom {
-  padding: 0;
-  margin: 2vh;
-  border-color: black;
-  border-width: 3px;
-  border-style: solid;
-  box-shadow: 5px 5px 5px black;
-}
 
 div#acabarJuego {
   display: flex;
   flex-flow: column wrap;
 }
 
-div.cronometro,
-div.utilidades,
-div#hms,
-div#infojuego,
-.msjFinal {
-  margin: 0 auto;
-  margin-bottom: 2vh;
-}
+
 
 #botonEmpezar {
   margin: 0 auto;
@@ -241,8 +216,6 @@ h1 {
   text-shadow: 2px 2px 3px white;
   margin-bottom: 2vh;
   color: chartreuse;
-
-
 }
 
 #infoJuegoFinalizado {
@@ -270,3 +243,35 @@ img#imgundefined {
 .texto-instrucciones{
     color: black
 }
+
+//---------------------------------------New Last-------------------------------------------------
+
+.setName{
+  display: flex;
+  flex-flow: column wrap;
+  margin:0 auto;
+  font-weight: 300;
+  text-shadow: 1px 1px 3px white;
+  margin-bottom: 2vh;
+  color: chartreuse;
+}
+
+label.setname{
+  margin-bottom: 0;
+}
+
+div#hms{
+  font-weight: 300;
+  text-shadow: 1px 1px 3px white;
+  margin-bottom: 2vh;
+  color: chartreuse;
+}
+
+input#playerName{
+  background-color: #A6EEE6FF;
+  border-radius: 3px;
+  border-color: black;
+  border:solid;
+  border-width:3px ;
+}
+
