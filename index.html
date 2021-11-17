@@ -19,28 +19,60 @@
 
   <nav class="container">
     <div class="row justify-content-start">
-      <input class="custom-btn btn-6 col-2" type="button" name="instrucciones" id="instrucciones" value="instrucciones">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn custom-btn btn-6 col-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        name="instrucciones" id="instrucciones">
+        Instrucciones
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Instrucciones</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body texto-instrucciones">
+              <p>Pon a prueba tu memoria!!</p>
+              <p>La clave de este juego está en emparejar las parejas y para ello tienes que:</p>
+               <ul>
+                 <li>Clicar sobre una imagen pero ojo! tienes que recordar que imagen has clicado.</li>
+                 <li>Clicar otra imagen. Si las imagenes coinciden ambas se quedarán bocarriba.</li>
+                 <li>El juego estará completo cuando todas la imágenes estén emparejadas.</li>
+               </ul>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn custom-btn btnClose col-2" data-bs-dismiss="modal">Close</button>
+             
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-     
   </nav>
+
+
+
 
   <h1>¿ Dónde andan Rick y Morty ?</h1>
 
   <article>
     <div class="utilidades">
-      
-        <div class="cronometro">
-          <div id="hms"></div>
-        </div>
-       <input class="custom-btn btn-6" type="button" name="Empezar" id="botonEmpezar" value="Comenzar"> 
+
+      <div class="cronometro">
+        <div id="hms"></div>
+      </div>
+      <input class="custom-btn btn-6" type="button" name="Empezar" id="botonEmpezar" value="Comenzar">
     </div>
     <div class="cards-list">
-      <div id="acabarJuego" class ="">
+      <div id="acabarJuego" class="">
         <div id="infoJuegoFinalizado">
           <p class="msjFinal"> Juego finalizado!! Has conseguido acabarlo en: <strong id="tiempoPartida"></strong></p>
-          
+
         </div>
-        <section id="tablero" class ="wraper"></section>
+        <section id="tablero" class="wraper"></section>
       </div>
     </div>
 
