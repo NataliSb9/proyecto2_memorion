@@ -188,13 +188,21 @@ class Juego{
                 console.log(`match!`)
                 this.correctas.push(this.volteadas[0])
                 this.correctas.push(this.volteadas[1])
+                console.log(this.correctas)
                 this.volteadas = []
                 this.pintar()
+                this.resolverPartida(this.correctas)
             }else{
                 this.volteadas[0].voltear()
                 this.volteadas[1].voltear()
                 this.volteadas = []
             }    
+        }
+    }
+
+    resolverPartida(correctas){
+        if(correctas.length >15){
+            console.log(`Has ganadado el juego`)
         }
     }
 
