@@ -1,15 +1,22 @@
 article {
+<<<<<<< HEAD
   width: 100vw;
+=======
+  width: 120rem;
+>>>>>>> 6635b36549f46bab70a4dea3ac2078ba36ba8bdb
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
+<<<<<<< HEAD
 body {
   display: flex;
   flex-flow: column wrap;
 }
 
+=======
+>>>>>>> 6635b36549f46bab70a4dea3ac2078ba36ba8bdb
 section {
   display: grid;
   grid-template-columns: 18rem 18rem 18rem 18rem;
@@ -20,6 +27,7 @@ section {
   margin-top: 2rem;
 }
 
+<<<<<<< HEAD
 .cards-list {
   z-index: 0;
   width: 100%;
@@ -28,13 +36,16 @@ section {
   flex-wrap: wrap;
 }
 
+=======
+>>>>>>> 6635b36549f46bab70a4dea3ac2078ba36ba8bdb
 .card-img-top {
   width: 100%;
   height: 15vw;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
 }
 
+<<<<<<< HEAD
 .cardCustom {
   margin: 2vh;
   border-width: 3px black;
@@ -50,6 +61,19 @@ h1 {
   margin: 0 auto;
   font-weight: 300;
   text-shadow: 2px 2px chartreuse;
+=======
+.cards-list {
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  border-radius: 25rem;
+  margin-top: 2rem;
+>>>>>>> 6635b36549f46bab70a4dea3ac2078ba36ba8bdb
 }
 
 #infoJuegoFinalizado {
