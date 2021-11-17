@@ -139,7 +139,7 @@ function shuffle(array){
 
 class Juego{
     constructor(){
-        this.tablero = []
+        this.tablero = [];
         this.volteadas = [];
         this.correctas =[];
     }
@@ -202,8 +202,19 @@ class Juego{
 
     resolverPartida(correctas){
         if(correctas.length >15){
-            console.log(`Has ganadado el juego`)
+            console.log(`Has ganadado el juego`);
+            let div = document.getElementById("infoJuegoFinalizado");
+            div.style.display = "block"
         }
+    }
+
+    timerCambiarAll() {
+        setTimeout(function () {
+            for (let j = 0; j < cartas.length; j++) {
+                let picture = document.getElementById(`img${j}`);
+                picture.src = "./styles/scss/Assets/Seeds.png";
+            }
+        }, 2000)
     }
 
     
