@@ -172,7 +172,7 @@ class Juego{
             let card = this.tablero[i].getHtml()
     
             document.getElementById("tablero").appendChild(card)
-           if(!this.tablero){
+           if(this.tableroActivo === true){
                 if(!this.correctas.includes(this.tablero[i])){
                     card.addEventListener('click', () => {
                         if(this.volteadas.length < 2){
@@ -217,15 +217,15 @@ class Juego{
         }
     }
 
-    activarTarjetas(){
-        this.tableroActivo = true;
+    activarTablero(){
+        this.tableroActivo = !this.tableroActivo;
+        this.pintar()
     }
 
 }
 
-function desbloquearCartas(){
-    juego.activarTarjetas()
-}
+
+
 
 function mostrarTodasTarjetas(){
     
@@ -249,21 +249,27 @@ function mostrarTodasTarjetas(){
 
 
 let juego = new Juego()
-document.querySelector("#botonEmpezar").addEventListener("click",mostrarTodasTarjetas)
 
+/***EVENTOS DEL BOTON EMPEZAR***/
+document.querySelector("#botonEmpezar").addEventListener("click",mostrarTodasTarjetas)
 document.querySelector("#botonEmpezar").addEventListener("click",desbloquearCartas)
 
-document.querySelector("#botonEmpezar").addEventListener("click",juego.activarTarjetas)
+
+
 
 window.onload = juego.comenzar()
 
+function desbloquearCartas(){
+    juego.activarTablero()
 
+}
+
+/***EVENTOS DEL BOTON REINICIAR***/
 
 document.getElementById("botonReiniciar").addEventListener('click',reinicio)
 document.getElementById("botonReiniciar").addEventListener('click',mostrarTodasTarjetas)
 
 function reinicio(){
     window.onload = juego.comenzar()
-   
-    /****METER UN CLEAR INTERVAL PARA ESTABLECER A 0 EL CRONO**** */
+
 }
