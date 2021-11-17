@@ -1,3 +1,4 @@
+
 // creo la clase Carta para asignar atributos a cada una de las Cartas que vamos a mostrar:
 class Carta {
     constructor(id, foto, nombre) {
@@ -257,6 +258,9 @@ window.onload = juego.comenzar()
 
 
 document.getElementById("botonReiniciar").addEventListener('click',reinicio)
+
 function reinicio(){
     window.onload = juego.comenzar()
+   
+    /****METER UN CLEAR INTERVAL PARA ESTABLECER A 0 EL CRONO**** */
 }

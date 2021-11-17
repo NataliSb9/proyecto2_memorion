@@ -1,3 +1,4 @@
+
 window.onload = init;
 // Funcion para iniciar en cuanto s eabra la pagina, añadimos que al hacer click se activen las funciones correspondientes e inicializamos rn 0 el crono:
 function init(){
@@ -50,3 +51,9 @@ function reiniciar(){
     h=0;m=0;s=0;
     document.querySelector(".start").addEventListener("click",cronometrar); 
 }*/
+function reinicioCrono(){
+    clearInterval(id);
+    init()
+    //document.querySelector(".start").addEventListener("click",cronometrar);
+}
+document.getElementById("botonReiniciar").addEventListener('click',reinicioCrono)
