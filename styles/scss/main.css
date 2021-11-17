@@ -20,6 +20,11 @@ section {
 }
 
 /***Button***/
+#botonReiniciar {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .btn-6 {
   background: #8ce436;
   line-height: 40px;
