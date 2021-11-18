@@ -15,9 +15,9 @@ function init() {
 function cronometrar() {
     setTimeout(function () {
         escribir();
-        id = setInterval(escribir, 4000);
+        id = setInterval(escribir, 1000);
         document.querySelector("#botonEmpezar").removeEventListener("click", cronometrar);
-    }, 8000)
+    }, 4000)
 }
 
 
