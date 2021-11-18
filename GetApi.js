@@ -235,6 +235,7 @@ function mostrarTodasTarjetas() {
 
         for (let i = 0; i < juego.tablero.length; i++) {
             juego.tablero[i].revelada = true;
+            juego.tableroActivo[i] = false
             juego.pintar()
         }
     }, 1000)
@@ -245,8 +246,15 @@ function mostrarTodasTarjetas() {
             juego.tablero[i].revelada = false;
             juego.pintar()
         }
+        
     }, 4000)
 
+    setTimeout(() => {
+            juego.activarTablero()
+    }, 4000)
+
+    
+    
 }
 
 
@@ -254,17 +262,12 @@ let juego = new Juego()
 
 /***EVENTOS DEL BOTON EMPEZAR***/
 document.querySelector("#botonEmpezar").addEventListener("click", mostrarTodasTarjetas)
-document.querySelector("#botonEmpezar").addEventListener("click", desbloquearCartas)
 
 
 
 
 window.onload = juego.comenzar()
 
-function desbloquearCartas() {
-    juego.activarTablero()
-
-}
 
 /***EVENTOS DEL BOTON REINICIAR***/
 
@@ -276,5 +279,6 @@ document.getElementById("botonReiniciar").addEventListener('click', mostrarTodas
 
 function reinicio() {
     window.onload = juego.comenzar()
-
 }
+
+
