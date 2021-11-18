@@ -1,5 +1,5 @@
 let hola = window.localStorage;
-console.log(hola)
+
 
 class Jugador {
     constructor(nombre, tiempos, npartida) {
