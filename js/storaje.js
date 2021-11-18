@@ -34,6 +34,7 @@ function enviarDatos() {
 
         alert("Debes introducir un nombre de jugador!!");
         juanito.nombre = prompt("¿Cuál es tu nombre?");
+        document.querySelector("#playerName").innerHTML=juanito.name;
 
     } finally {
         let data = [];
