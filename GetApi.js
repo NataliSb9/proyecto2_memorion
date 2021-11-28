@@ -92,9 +92,6 @@ async function getRandomCharacter() {
 
 
 
-/***LOGICA JUEGO ---> PONERLO EN UN JS LLAMADO JUEGO Y QUE ESTE ESTE VINCULADO AL MAIN.JS****/
-
-
 class CartaTablero {
 
     constructor(parId, foto, nombre, idDom) {
@@ -113,7 +110,6 @@ class CartaTablero {
         card.classList.add("card-image");
 
         let personajeImgHtml = document.createElement('img')
-        //personajeImgHtml.classList.add("img-fluid")
         if (this.revelada) {
             personajeImgHtml.setAttribute('src', this.foto)
         } else {
@@ -274,12 +270,9 @@ function iniciarJuego(){
     }
 }
 
-
-
 /***EVENTOS DEL BOTON EMPEZAR***/
 document.querySelector("#botonEmpezar").addEventListener("click", iniciarJuego)
-//document.querySelector("#botonEmpezar").addEventListener("click", mostrarTodasTarjetas)
-//window.onload = juego.comenzar()
+
 
 
 

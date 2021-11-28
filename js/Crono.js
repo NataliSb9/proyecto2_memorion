@@ -5,9 +5,6 @@ let m = 0;
 let s = 0;
 
 function init() {
-
-    //document.querySelector(".stop").addEventListener("click",parar);
-    //document.querySelector(".reiniciar").addEventListener("click",reiniciar);
   
     document.getElementById("hms").innerHTML = "00:00:00";
 }
