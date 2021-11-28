@@ -1,3 +1,5 @@
+import cronometrar from './js/Crono.js'
+
 // creo la clase Carta para asignar atributos a cada una de las Cartas que vamos a mostrar:
 class Carta {
     constructor(id, foto, nombre) {
@@ -215,7 +217,6 @@ class Juego {
             div.style.display = "block"
             parar()
             document.querySelector("#tiempoPartida").innerHTML = registroOut;
-            //enviarDatos()
         }
     }
 
@@ -234,8 +235,10 @@ function mostrarTodasTarjetas() {
     setTimeout(() => {
 
         for (let i = 0; i < juego.tablero.length; i++) {
+            console.log(juego.tablero[i].revelada)
             juego.tablero[i].revelada = true;
-            juego.tableroActivo[i] = false
+            console.log(juego.tableroActivo[i])
+            juego.tableroActivo = false
             juego.pintar()
         }
     }, 1000)
@@ -259,26 +262,29 @@ function mostrarTodasTarjetas() {
 
 
 let juego = new Juego()
+window.onload = juego.comenzar()
+function iniciarJuego(){
+    let namePlayer = document.getElementById("playerName")
+
+    if(namePlayer.value == ""){
+        alert("Debes introducir el nombre para poder jugar")
+    } else{
+        mostrarTodasTarjetas()
+        cronometrar()
+        
+    }
+}
+
+
 
 /***EVENTOS DEL BOTON EMPEZAR***/
-document.querySelector("#botonEmpezar").addEventListener("click", mostrarTodasTarjetas)
+document.querySelector("#botonEmpezar").addEventListener("click", iniciarJuego)
+//document.querySelector("#botonEmpezar").addEventListener("click", mostrarTodasTarjetas)
+//window.onload = juego.comenzar()
 
 
 
 
-window.onload = juego.comenzar()
 
-
-/***EVENTOS DEL BOTON REINICIAR***/
-
-
-document.getElementById("botonReiniciar").addEventListener('click', reinicio)
-
-document.getElementById("botonReiniciar").addEventListener('click', mostrarTodasTarjetas)
-
-
-function reinicio() {
-    window.onload = juego.comenzar()
-}
 
 

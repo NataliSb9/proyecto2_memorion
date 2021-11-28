@@ -23,17 +23,14 @@ section {
 .botonesJuego {
   display: flex;
   justify-content: center;
+
 }
 
 .botonesJuego div {
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
-
-#botonReiniciar {
   margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 .btn-6 {

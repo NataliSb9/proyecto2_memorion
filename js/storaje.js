@@ -83,7 +83,7 @@ function leerDatos() {
 
 
     document.querySelector("#msjRanking").innerHTML = `${jorgito} , tu top 5 de tiempos records en completar nuestro juego es:`;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < localStorage.length; i++) {
         document.querySelector(`#p${i+1}`).innerHTML = ` ${top5[i][1]} horas, ${top5[i][2]} minutos y ${top5[i][3]} segundos. `
     }
 
