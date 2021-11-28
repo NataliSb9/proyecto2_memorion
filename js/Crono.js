@@ -6,7 +6,6 @@ let s = 0;
 
 function init() {
 
-    document.querySelector("#botonEmpezar").addEventListener("click", cronometrar);
     //document.querySelector(".stop").addEventListener("click",parar);
     //document.querySelector(".reiniciar").addEventListener("click",reiniciar);
   
@@ -17,7 +16,7 @@ function init() {
 function cronometrar() {
     setTimeout(function () {
         escribir();
-        setInterval(escribir, 1000);
+        id=setInterval(escribir, 1000);
         document.querySelector("#botonEmpezar").removeEventListener("click", cronometrar);
     }, 4000)
 }
@@ -78,7 +77,3 @@ function parar() {
     return registroOut, tiempoCrono;
 }
 
-
-
-
-export default cronometrar

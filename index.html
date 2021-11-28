@@ -75,27 +75,57 @@
           Instrucciones
         </button>
       </div>
-
     </div>
+    <div class="modal fade" id="puntuacion" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ranking Puntuación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body texto-instrucciones">
+            
+            <ol id="rankingPuntuacion">
 
-    <div class="cards-list">
-      <div id="acabarJuego" class="">
-        <div id="infoJuegoFinalizado">
-          <p class="msjFinal"> Juego finalizado!! Has conseguido acabarlo en: <strong id="tiempoPartida"></strong></p>
-          <div id="scoreBoard">
-            <p id="msjRanking"></p>
-            <ol>
-              <li id="p1"></li>
-              <li id="p2"></li>
-              <li id="p3"></li>
-              <li id="p4"></li>
-              <li id="p5"></li>
             </ol>
           </div>
+          <div class="modal-footer container">
+            <button type="button" class="btn custom-btn btnClose col-2 row" data-bs-dismiss="modal">Close</button>
+          </div>
         </div>
+      </div>
+    </div>
+
+    
+    <div class="cards-list">
+      <div id="acabarJuego" class="">
+        <div id="infoJuegoFinalizado" >
+          <p class="msjFinal cards-list"> Juego finalizado! consulta tu tiempo</p>
+          <div class="cards-list"> 
+            <div class="">
+              <div class="">
+                <div class=""> 
+                  <button type="button" class="custom-btn btn-6 " data-bs-toggle="modal" data-bs-target="#puntuacion"
+                  name="puntuacion" id="puntuacionBtn">
+                  ver tiempo
+                  </button>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="scoreBoard">
+         
+          
+        </div>
+
+
         <section id="tablero" class="wraper"></section>
       </div>
     </div>
+    
   </article>
 
 
@@ -104,9 +134,9 @@
   <!--  <script src="./js/main.js"></script>  -->
 
 
-  <script  src="./js/storaje.js"></script>
-  <script type="module" src="./GetApi.js"></script>
-  <script type="module" src="./js/Crono.js"></script>
+  <script src="./js/storaje.js"></script>
+  <script src="./GetApi.js"></script>
+  <script src="./js/Crono.js"></script>
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

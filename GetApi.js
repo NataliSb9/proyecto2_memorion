@@ -1,4 +1,4 @@
-import cronometrar from './js/Crono.js'
+
 
 // creo la clase Carta para asignar atributos a cada una de las Cartas que vamos a mostrar:
 class Carta {
@@ -216,7 +216,7 @@ class Juego {
             let div = document.getElementById("infoJuegoFinalizado");
             div.style.display = "block"
             parar()
-            document.querySelector("#tiempoPartida").innerHTML = registroOut;
+           
         }
     }
 
@@ -269,9 +269,8 @@ function iniciarJuego(){
     if(namePlayer.value == ""){
         alert("Debes introducir el nombre para poder jugar")
     } else{
-        mostrarTodasTarjetas()
-        cronometrar()
-        
+        mostrarTodasTarjetas();
+        cronometrar();        
     }
 }
 

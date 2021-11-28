@@ -82,9 +82,14 @@ function leerDatos() {
 
 
 
-    document.querySelector("#msjRanking").innerHTML = `${jorgito} , tu top 5 de tiempos records en completar nuestro juego es:`;
+    //document.querySelector("#msjRanking").innerHTML = `${jorgito} ,tu ranking de tiempos en completar nuestro juego es:`;
     for (let i = 0; i < localStorage.length; i++) {
-        document.querySelector(`#p${i+1}`).innerHTML = ` ${top5[i][1]} horas, ${top5[i][2]} minutos y ${top5[i][3]} segundos. `
+        //document.querySelector(`#p${i+1}`).innerHTML = ` ${top5[i][1]} horas, ${top5[i][2]} minutos y ${top5[i][3]} segundos. `
+        let ol = document.getElementById('rankingPuntuacion')
+        let li = document.createElement('li')
+        li.innerHTML = ` ${top5[i][1]} horas, ${top5[i][2]} minutos y ${top5[i][3]} segundos. `
+        ol.appendChild(li)
+
     }
 
 

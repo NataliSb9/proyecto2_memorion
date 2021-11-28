@@ -185,7 +185,6 @@ div#infojuego,
 h1 {
   margin: 0 auto;
   padding-top: 1rem;
-  margin-right: 1.5rem;
   font-weight: 300;
   font-size: 3rem;
   text-shadow: 2px 2px 3px white;
@@ -241,6 +240,16 @@ img#imgundefined {
   text-shadow: 2px 2px 3px chartreuse;
   margin-bottom: 2vh;
   color: white;
+}
+
+ol li {
+  color: black;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.puntuacion{
+  justify-content: center;
 }
 
 .texto-instrucciones {
